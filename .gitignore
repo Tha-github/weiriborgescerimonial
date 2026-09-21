@@ -1,0 +1,6 @@
+# Artefatos locais; não são fontes do site.
+dist/
+.audit-browser/
+.final-review/
+.verification/
+.a1-backup/

@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Em produção, enviar a CSP também como cabeçalho HTTP, com frame-ancestors. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-fjDr2vrMod+LFFX9HlAzdVS/WDwVw+07oJZv8yOPRwo='; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+    <title>Weiri Borges | Assessoria, Cerimonial e Curadoria para Noivas</title>
+    <meta name="description" content="Assessoria, cerimonial e curadoria para casamentos em São Luís de Montes Belos, Goiânia e região. Conheça a Weiri Borges e agende uma conversa.">
+    <!-- Pré-publicação: liberar indexação somente após revisar as pendências. -->
+    <meta name="robots" content="noindex, follow">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="theme-color" content="#668E8D">
+    <!-- publication-urls: canonical e og:url gerados por scripts/prepare-publication.mjs -->
+    <!-- Imagens sociais aguardam arte aprovada e URL absoluta: og:image e twitter:image. -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Weiri Borges Assessoria &amp; Cerimonial">
+    <meta property="og:title" content="Weiri Borges | Assessoria, Cerimonial e Curadoria para Noivas">
+    <meta property="og:description" content="Assessoria, cerimonial e curadoria para casamentos em São Luís de Montes Belos, Goiânia e região. Conheça a Weiri Borges e agende uma conversa.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Weiri Borges | Assessoria, Cerimonial e Curadoria para Noivas">
+    <meta name="twitter:description" content="Assessoria, cerimonial e curadoria para casamentos em São Luís de Montes Belos, Goiânia e região. Conheça a Weiri Borges e agende uma conversa.">
+    <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" sizes="any">
+    <script type="application/ld+json" id="organization-data">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Weiri Borges Assessoria & Cerimonial",
+      "email": "weiborgescerimonial@gmail.com",
+      "telephone": "+5564992104641",
+      "sameAs": ["https://www.instagram.com/weiriborgescerimonial/"],
+      "areaServed": ["São Luís de Montes Belos e região", "Goiânia e região"]
+    }
+    </script>
+    <link rel="preload" href="assets/fonts/cormorant-regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="assets/fonts/manrope-regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+    <header class="site-header">
+      <div class="container header-layout">
+        <!-- Assinatura tipográfica provisória: substituir pelo logo oficial aprovado. -->
+        <a class="brand" href="#inicio" aria-label="Weiri Borges — início">
+          <span class="brand__name">Weiri Borges</span>
+          <span class="brand__descriptor">Assessoria &amp; Cerimonial</span>
+        </a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navegacao-principal" hidden>
+          <span>Menu</span>
+          <span class="menu-toggle__icon" aria-hidden="true"></span>
+        </button>
+        <nav id="navegacao-principal" class="site-nav" aria-label="Navegação principal">
+          <ul class="site-nav__list">
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#curadoria">Curadoria</a></li>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#portfolio">Portfólio</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
+          <a class="header-cta" href="#contato">Vamos conversar <span aria-hidden="true">↗</span></a>
+        </nav>
+      </div>
+    </header>
+    <main id="conteudo" tabindex="-1">
+      <section id="inicio" class="hero" aria-labelledby="inicio-titulo">
+        <div class="container hero__layout">
+          <div class="hero__content">
+            <h1 id="inicio-titulo">
+              <span class="hero__line">Seu casamento</span>
+              <span class="hero__line">merece ser</span>
+              <span class="hero__line">vivido.</span>
+              <em class="hero__line hero__line--accent">Não administrado.</em>
+            </h1>
+            <p class="hero__description">Enquanto cuidamos dos detalhes, vocês vivem a história que escolheram construir juntos.</p>
+            <div class="hero__actions">
+              <a class="button hero__primary" href="#contato">
+                <span class="button__label">Agendar uma conversa</span>
+                <img class="icon" src="assets/icons/arrow-up-right.svg" width="20" height="20" alt="" aria-hidden="true">
+              </a>
+              <a class="hero__secondary" href="#portfolio">Conhecer nosso trabalho <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+          <div class="hero__media">
+            <picture class="hero__logo">
+              <source srcset="assets/images/logofake.webp" type="image/webp">
+              <img src="assets/images/logofake.png" width="2160" height="1904" alt="" aria-hidden="true" decoding="async">
+            </picture>
+            <picture class="hero__photo">
+              <source type="image/webp" srcset="assets/images/weiri-700.webp 700w, assets/images/weiri-1200.webp 1200w" sizes="(min-width: 64rem) 40vw, 80vw">
+              <img class="hero__image" src="assets/images/weiri.png" width="1800" height="2700" alt="Retrato de Weiri Borges, sorrindo, de braços cruzados, com camisa azul." fetchpriority="high" decoding="async">
+            </picture>
+          </div>
+        </div>
+      </section>
+      <div class="identity-band" aria-hidden="true">
+        <span>Weiri Borges</span><i></i><span>Assessoria &amp; Cerimonial</span><i></i><span>Weiri Borges</span><i></i><span>Assessoria &amp; Cerimonial</span><i></i><span>Weiri Borges</span>
+      </div>
+
+      <section id="sobre" class="section about" aria-labelledby="sobre-titulo">
+        <div class="container about__layout">
+          <div class="about__head">
+            <h2 id="sobre-titulo">Muito mais do que <em>organizar</em> um casamento.</h2>
+            <!-- PENDENTE: inserir a missão oficial de prompt.md e remover hidden.
+                 O arquivo está vazio; não substituir por uma missão inventada. -->
+            <div id="sobre-missao" class="about__mission flow" hidden></div>
+            <dl class="about__highlights" aria-label="Nossa trajetória">
+              <div class="about__highlight">
+                <dt>de Weiri Borges Assessoria &amp; Cerimonial</dt>
+                <dd><span class="about__number">07</span> <span class="about__unit">anos</span></dd>
+              </div>
+              <div class="about__highlight">
+                <dt>de experiência com eventos</dt>
+                <dd><span class="about__number">+20</span> <span class="about__unit">anos</span></dd>
+              </div>
+            </dl>
+          </div>
+          <!-- Galeria: 12 fotografias em 4 fileiras de 3. Trocar as imagens ilustrativas e os espaços reservados pelas fotos aprovadas. -->
+          <div class="gallery">
+              <figure class="gallery__item gallery__item--1">
+                <picture>
+                  <source srcset="assets/images/hero-placeholder.webp" type="image/webp">
+                  <img class="gallery__img gallery__img--a" src="assets/images/hero-placeholder.jpg" width="1200" height="801" alt="Imagem ilustrativa de uma mesa de recepção com flores brancas, taças verdes e cadeiras escuras." loading="lazy" decoding="async">
+                </picture>
+              </figure>
+              <figure class="gallery__item gallery__item--2">
+                <!-- Substituir por a fotografia definitiva 02: manter a proporção e criar a versão WebP. -->
+                <img class="gallery__img" src="assets/images/galeria/02.svg" width="800" height="800" alt="Espaço reservado para a fotografia 02 da galeria." loading="lazy" decoding="async">
+              </figure>
+              <figure class="gallery__item gallery__item--3">
+                <picture>
+                  <source srcset="assets/images/sobre-placeholder.webp" type="image/webp">
+                  <img class="gallery__img gallery__img--a" src="assets/images/sobre-placeholder.jpg" width="1000" height="1500" alt="Imagem ilustrativa de mesas posta ao ar livre, com flores brancas e taças verdes entre as árvores." loading="lazy" decoding="async">
+                </picture>
+              </figure>
+              <figure class="gallery__item gallery__item--4">
+                <!-- Substituir por a fotografia definitiva 04: manter a proporção e criar a versão WebP. -->
+                <img class="gallery__img" src="assets/images/galeria/04.svg" width="800" height="800" alt="Espaço reservado para a fotografia 04 da galeria." loading="lazy" decoding="async">
+              </figure>
+              <figure class="gallery__item gallery__item--5">
+                <picture>
+                  <source srcset="assets/images/hero-placeholder.webp" type="image/webp">
+                  <img class="gallery__img gallery__img--b" src="assets/images/hero-placeholder.jpg" width="1200" height="801" alt="Imagem ilustrativa: detalhe de taças verdes e flores brancas sobre a mesa." loading="lazy" decoding="async">
+                </picture>
+              </figure>
+              <figure class="gallery__item gallery__item--6">
+                <!-- Substituir por a fotografia definitiva 06: manter a proporção e criar a versão WebP. -->
+                <img class="gallery__img" src="assets/images/galeria/06.svg" width="800" height="800" alt="Espaço reservado para a fotografia 06 da galeria." loading="lazy" decoding="async">
+              </figure>
+              <figure class="gallery__item gallery__item--7">
+                <picture>
+                  <source srcset="assets/images/sobre-placeholder.webp" type="image/webp">
+                  <img class="gallery__img gallery__img--b" src="assets/images/sobre-placeholder.jpg" width="1000" height="1500" alt="Imagem ilustrativa: mesa posta com pratos de palha, taças verdes e um marcador de mesa dourado." loading="lazy" decoding="async">
+                </picture>
+              </figure>
+              <figure class="gallery__item gallery__item--8">
+                <!-- Substituir por a fotografia definitiva 08: manter a proporção e criar a versão WebP. -->
+                <img class="gallery__img" src="assets/images/galeria/08.svg" width="800" height="800" alt="Espaço reservado para a fotografia 08 da galeria." loading="lazy" decoding="async">
+              </figure>
+              <figure class="gallery__item gallery__item--9">
+                <picture>
+                  <source srcset="assets/images/hero-placeholder.webp" type="image/webp">
+                  <img class="gallery__img gallery__img--c" src="assets/images/hero-placeholder.jpg" width="1200" height="801" alt="Imagem ilustrativa: cadeiras escuras e mesa redonda em recepção ao ar livre." loading="lazy" decoding="async">
+                </picture>
+              </figure>
+              <figure class="gallery__item gallery__item--10">
+                <!-- Substituir por a fotografia definitiva 10: manter a proporção e criar a versão WebP. -->
+                <img class="gallery__img" src="assets/images/galeria/10.svg" width="800" height="800" alt="Espaço reservado para a fotografia 10 da galeria." loading="lazy" decoding="async">
+              </figure>
+              <figure class="gallery__item gallery__item--11">
+                <picture>
+                  <source srcset="assets/images/sobre-placeholder.webp" type="image/webp">
+                  <img class="gallery__img gallery__img--c" src="assets/images/sobre-placeholder.jpg" width="1000" height="1500" alt="Imagem ilustrativa: recepção ao ar livre com luz natural e luzes penduradas." loading="lazy" decoding="async">
+                </picture>
+              </figure>
+              <figure class="gallery__item gallery__item--12">
+                <!-- Substituir por a fotografia definitiva 12: manter a proporção e criar a versão WebP. -->
+                <img class="gallery__img" src="assets/images/galeria/12.svg" width="800" height="800" alt="Espaço reservado para a fotografia 12 da galeria." loading="lazy" decoding="async">
+              </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="mission" aria-label="Missão">
+        <div class="container mission__layout">
+          <blockquote class="mission__quote">Porque enquanto cuidamos de tudo, eles podem simplesmente <em>viver o que sonharam.</em></blockquote>
+        </div>
+      </section>
+
+      <figure class="panorama panorama--table">
+        <picture><source srcset="assets/images/sobre-placeholder.webp" type="image/webp"><img src="assets/images/sobre-placeholder.jpg" width="1000" height="1500" loading="lazy" decoding="async" alt="Imagem ilustrativa: detalhe de taças verdes, flores brancas e pratos sobre uma mesa posta."></picture>
+        <figcaption class="panorama__caption"><span>Imagem ilustrativa</span> <a href="https://www.pexels.com/photo/wedding-table-decoration-19870036/" target="_blank" rel="noopener noreferrer">Jonathan Borba / Pexels<span class="visually-hidden"> (abre em nova aba)</span></a></figcaption>
+      </figure>
+
+      <section id="curadoria" class="section curation" aria-labelledby="curadoria-titulo">
+        <div class="container curation__layout">
+          <div class="curation__intro">
+            <h2 id="curadoria-titulo">Antes de escolher, <em>é preciso entender.</em></h2>
+            <p class="curation__description">A curadoria começa pela escuta: o que faz sentido para vocês, o que desejam expressar e como querem viver esse dia. A partir dessa essência, conceito, estilo e atmosfera dão direção às escolhas do casamento.</p>
+            <figure class="curation__figure">
+              <picture><source srcset="assets/images/hero-placeholder.webp" type="image/webp"><img src="assets/images/hero-placeholder.jpg" width="1200" height="801" loading="lazy" decoding="async" alt="Imagem ilustrativa: close de flores brancas e taças verdes sobre uma mesa."></picture>
+            </figure>
+          </div>
+          <ol class="curation__path" aria-label="O percurso da curadoria" role="list">
+            <li><span class="curation__no" aria-hidden="true">01</span><span class="curation__step">Essência</span><span class="curation__meaning">O que faz sentido para vocês.</span></li>
+            <li><span class="curation__no" aria-hidden="true">02</span><span class="curation__step">Conceito</span><span class="curation__meaning">A ideia que traduz essa identidade.</span></li>
+            <li><span class="curation__no" aria-hidden="true">03</span><span class="curation__step">Estilo</span><span class="curation__meaning">A expressão visual dessa ideia.</span></li>
+            <li><span class="curation__no" aria-hidden="true">04</span><span class="curation__step">Atmosfera</span><span class="curation__meaning">A sensação que envolve o dia.</span></li>
+            <li><span class="curation__no" aria-hidden="true">05</span><span class="curation__step">Escolhas</span><span class="curation__meaning">Cada detalhe em sintonia com o todo.</span></li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="servicos" class="section services" aria-labelledby="servicos-titulo">
+        <div class="container">
+          <div class="services__intro">
+            <h2 id="servicos-titulo">Você sabe <em>a diferença?</em></h2>
+            <p class="services__lead">Dar direção às escolhas, organizar o caminho e coordenar o grande dia. Cada serviço tem um papel no casamento.</p>
+          </div>
+          <div class="services__grid">
+            <article class="service" aria-labelledby="servico-curadoria-titulo">
+              <span class="service__number" aria-hidden="true">01</span>
+              <h3 id="servico-curadoria-titulo">Curadoria</h3>
+              <p class="service__statement">A curadoria dá direção às escolhas.</p>
+              <!-- Síntese baseada no texto fornecido na etapa 3. O conceito completo
+                   oficial deve ser integrado aqui quando prompt.md for preenchido. -->
+              <div class="service__description flow">
+                <p>A curadora ajuda a noiva a entender o que realmente representa quem ela é e transforma esse entendimento em escolhas coerentes para o casamento.</p>
+                <p>Da essência ao conceito, do estilo à atmosfera, as escolhas ganham uma direção. A curadora orienta esse percurso, sem escolher pela noiva.</p>
+              </div>
+              <a class="service__link" href="#curadoria">Conheça o percurso da curadoria <span aria-hidden="true">↗</span></a>
+            </article>
+            <article class="service" aria-labelledby="servico-assessoria-titulo">
+              <span class="service__number" aria-hidden="true">02</span>
+              <h3 id="servico-assessoria-titulo">Assessoria</h3>
+              <p class="service__statement">A assessoria organiza o casamento.</p>
+              <p class="service__description">Transforma as decisões em um planejamento organizado, conectando orçamento, fornecedores e prazos, com acompanhamento ao longo dos preparativos.</p>
+              <ul class="service__scope" aria-label="Frentes da assessoria" role="list">
+                <li>Planejamento</li>
+                <li>Orçamento</li>
+                <li>Fornecedores</li>
+                <li>Cronograma</li>
+                <li>Reuniões</li>
+                <li>Escolhas</li>
+                <li>Acompanhamento</li>
+              </ul>
+            </article>
+            <article class="service" aria-labelledby="servico-cerimonial-titulo">
+              <span class="service__number" aria-hidden="true">03</span>
+              <h3 id="servico-cerimonial-titulo">Cerimonial</h3>
+              <p class="service__statement">O cerimonial coordena o grande dia.</p>
+              <p class="service__description">Conduz a execução do que foi planejado: alinha fornecedores, orienta convidados e acompanha protocolos e horários, lidando com os imprevistos do dia.</p>
+              <ul class="service__scope" aria-label="Frentes do cerimonial" role="list">
+                <li>Fornecedores</li>
+                <li>Convidados</li>
+                <li>Protocolos</li>
+                <li>Horários</li>
+                <li>Imprevistos</li>
+                <li>Execução</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="experiencia" class="section experience" aria-labelledby="experiencia-titulo">
+        <div class="container experience__layout">
+          <div class="experience__intro" data-reveal>
+            <h2 id="experiencia-titulo">Para que vocês possam cuidar do que <em>realmente importa.</em></h2>
+            <p class="experience__lead">Estar presente. Abraçar quem se ama. Viver cada instante. O cuidado com os detalhes abre espaço para as memórias que vocês querem guardar.</p>
+            <a class="experience__link" href="#processo">Conheça a nossa jornada <span aria-hidden="true">↓</span></a>
+          </div>
+          <ul class="experience__pillars" aria-label="Pilares da experiência" role="list">
+            <li class="pillar" data-reveal><h3>Cuidado</h3><p>Atenção às pessoas e aos detalhes que tornam esse dia de vocês.</p></li>
+            <li class="pillar" data-reveal><h3>Segurança</h3><p>Orientação para decidir com clareza e caminhar com confiança.</p></li>
+            <li class="pillar" data-reveal><h3>Organização</h3><p>Cada etapa no seu tempo, com os preparativos conectados entre si.</p></li>
+            <li class="pillar" data-reveal><h3>Sensibilidade</h3><p>Escuta para acolher os desejos e respeitar a história de vocês.</p></li>
+            <li class="pillar" data-reveal><h3>Leveza</h3><p>Espaço para aproveitar o caminho e estar inteiro no grande dia.</p></li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="portfolio" class="section portfolio" aria-labelledby="portfolio-titulo">
+        <div class="container">
+          <div class="portfolio__intro">
+            <h2 id="portfolio-titulo">Histórias que merecem <em>ser lembradas.</em></h2>
+          </div>
+          <!-- Ativar os sources somente após adicionar os arquivos reais.
+               Manter a mesma proporção em AVIF, WebP e no fallback. -->
+          <div class="portfolio__gallery">
+            <figure class="portfolio__item portfolio__item--1">
+              <picture class="portfolio__frame">
+                <!-- <source srcset="assets/images/portfolio/01.avif" type="image/avif"> -->
+                <!-- <source srcset="assets/images/portfolio/01.webp" type="image/webp"> -->
+                <img src="assets/images/portfolio/01.svg" alt="Espaço reservado para fotografia do encontro do casal. Placeholder, não é uma imagem de evento real." width="900" height="1125" loading="lazy" decoding="async">
+              </picture>
+              <figcaption><span>01 — O encontro</span><span>Imagem provisória</span></figcaption>
+            </figure>
+            <figure class="portfolio__item portfolio__item--2">
+              <picture class="portfolio__frame">
+                <!-- <source srcset="assets/images/portfolio/02.avif" type="image/avif"> -->
+                <!-- <source srcset="assets/images/portfolio/02.webp" type="image/webp"> -->
+                <img src="assets/images/portfolio/02.svg" alt="Espaço reservado para fotografia dos detalhes do casamento. Placeholder, não é uma imagem de evento real." width="640" height="640" loading="lazy" decoding="async">
+              </picture>
+              <figcaption><span>02 — Os detalhes</span><span>Imagem provisória</span></figcaption>
+            </figure>
+            <figure class="portfolio__item portfolio__item--3">
+              <picture class="portfolio__frame">
+                <!-- <source srcset="assets/images/portfolio/03.avif" type="image/avif"> -->
+                <!-- <source srcset="assets/images/portfolio/03.webp" type="image/webp"> -->
+                <img src="assets/images/portfolio/03.svg" alt="Espaço reservado para fotografia da atmosfera da celebração. Placeholder, não é uma imagem de evento real." width="1200" height="750" loading="lazy" decoding="async">
+              </picture>
+              <figcaption><span>03 — A atmosfera</span><span>Imagem provisória</span></figcaption>
+            </figure>
+            <figure class="portfolio__item portfolio__item--4">
+              <picture class="portfolio__frame">
+                <!-- <source srcset="assets/images/portfolio/04.avif" type="image/avif"> -->
+                <!-- <source srcset="assets/images/portfolio/04.webp" type="image/webp"> -->
+                <img src="assets/images/portfolio/04.svg" alt="Espaço reservado para fotografia dos preparativos. Placeholder, não é uma imagem de evento real." width="640" height="800" loading="lazy" decoding="async">
+              </picture>
+              <figcaption><span>04 — Os preparativos</span><span>Imagem provisória</span></figcaption>
+            </figure>
+            <figure class="portfolio__item portfolio__item--5">
+              <picture class="portfolio__frame">
+                <!-- <source srcset="assets/images/portfolio/05.avif" type="image/avif"> -->
+                <!-- <source srcset="assets/images/portfolio/05.webp" type="image/webp"> -->
+                <img src="assets/images/portfolio/05.svg" alt="Espaço reservado para fotografia da cerimônia. Placeholder, não é uma imagem de evento real." width="900" height="1200" loading="lazy" decoding="async">
+              </picture>
+              <figcaption><span>05 — A cerimônia</span><span>Imagem provisória</span></figcaption>
+            </figure>
+            <figure class="portfolio__item portfolio__item--6">
+              <picture class="portfolio__frame">
+                <!-- <source srcset="assets/images/portfolio/06.avif" type="image/avif"> -->
+                <!-- <source srcset="assets/images/portfolio/06.webp" type="image/webp"> -->
+                <img src="assets/images/portfolio/06.svg" alt="Espaço reservado para fotografia dos afetos entre os convidados. Placeholder, não é uma imagem de evento real." width="900" height="600" loading="lazy" decoding="async">
+              </picture>
+              <figcaption><span>06 — Os afetos</span><span>Imagem provisória</span></figcaption>
+            </figure>
+            <figure class="portfolio__item portfolio__item--7">
+              <picture class="portfolio__frame">
+                <!-- <source srcset="assets/images/portfolio/07.avif" type="image/avif"> -->
+                <!-- <source srcset="assets/images/portfolio/07.webp" type="image/webp"> -->
+                <img src="assets/images/portfolio/07.svg" alt="Espaço reservado para fotografia da celebração. Placeholder, não é uma imagem de evento real." width="640" height="800" loading="lazy" decoding="async">
+              </picture>
+              <figcaption><span>07 — A celebração</span><span>Imagem provisória</span></figcaption>
+            </figure>
+            <figure class="portfolio__item portfolio__item--8">
+              <picture class="portfolio__frame">
+                <!-- <source srcset="assets/images/portfolio/08.avif" type="image/avif"> -->
+                <!-- <source srcset="assets/images/portfolio/08.webp" type="image/webp"> -->
+                <img src="assets/images/portfolio/08.svg" alt="Espaço reservado para fotografia panorâmica de uma memória do casal. Placeholder, não é uma imagem de evento real." width="1200" height="750" loading="lazy" decoding="async">
+              </picture>
+              <figcaption><span>08 — A memória</span><span>Imagem provisória</span></figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section id="processo" class="section process" aria-labelledby="processo-titulo">
+        <div class="container">
+          <div class="process__intro" data-reveal>
+            <h2 id="processo-titulo">Do primeiro encontro <em>ao grande dia.</em></h2>
+            <p>Uma jornada que começa com a escuta e ganha forma, passo a passo, até o momento de viver.</p>
+          </div>
+          <ol class="process__journey" aria-label="Etapas da nossa jornada" role="list">
+            <li>
+              <span class="process__number" aria-hidden="true">01</span>
+              <div class="process__step" data-reveal><h3>Escutar</h3><p>Conhecer a história de vocês, seus desejos e o que importa para esse dia.</p></div>
+            </li>
+            <li>
+              <span class="process__number" aria-hidden="true">02</span>
+              <div class="process__step" data-reveal><h3>Interpretar</h3><p>Traduzir essa essência em um conceito que dê direção às escolhas.</p></div>
+            </li>
+            <li>
+              <span class="process__number" aria-hidden="true">03</span>
+              <div class="process__step" data-reveal><h3>Planejar</h3><p>Organizar orçamento, fornecedores e cronograma para dar forma ao casamento.</p></div>
+            </li>
+            <li>
+              <span class="process__number" aria-hidden="true">04</span>
+              <div class="process__step" data-reveal><h3>Coordenar</h3><p>Alinhar pessoas, horários e detalhes para conduzir a execução do grande dia.</p></div>
+            </li>
+            <li>
+              <span class="process__number" aria-hidden="true">05</span>
+              <div class="process__step" data-reveal><h3>Viver</h3><p>Estar presente e celebrar a história de vocês, enquanto cuidamos dos detalhes.</p></div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="historia" class="section story" aria-labelledby="historia-titulo">
+        <div class="container story__banner">
+          <picture class="story__logo">
+            <source srcset="assets/images/logofake2.webp" type="image/webp">
+            <img src="assets/images/logofake2.png" width="2160" height="1909" alt="Logotipo da Weiri Borges: flor de lótus estilizada." loading="lazy" decoding="async">
+          </picture>
+          <h2 id="historia-titulo">Por trás de cada casamento, existe uma pessoa que <em>escolheu cuidar.</em></h2>
+          <p class="story__text">A experiência de Weiri com eventos começou em 2002. São 7 anos de Weiri Borges Assessoria &amp; Cerimonial — uma trajetória dedicada a cuidar.</p>
+          <dl class="story__milestones" aria-label="Marcos da trajetória">
+            <div class="story__milestone"><dt>2002</dt><dd>Início da experiência com eventos.</dd></div>
+            <div class="story__milestone"><dt>07 <span>anos</span></dt><dd>Weiri Borges Assessoria &amp; Cerimonial.</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <section id="faq" class="section faq" aria-labelledby="faq-titulo">
+        <div class="container">
+          <div class="faq__invitation">
+            <div class="faq__intro">
+              <h2 id="faq-titulo">Perguntas <em>frequentes</em></h2>
+            </div>
+            <!-- prompt.md está vazio. Preencher as respostas somente com informações
+                 oficiais. Sem JavaScript, todas permanecem visíveis para leitura. -->
+            <div class="faq__questions" data-accordion>
+              <div class="faq__item">
+                <h3><button id="faq-pergunta-1" class="faq__question" type="button" aria-expanded="true" aria-controls="faq-resposta-1" disabled><span class="faq__text">Como funciona a primeira conversa?</span><span class="faq__symbol" aria-hidden="true"></span></button></h3>
+                <div id="faq-resposta-1" class="faq__answer" role="region" aria-labelledby="faq-pergunta-1">
+                  <!-- Preencher: formato e funcionamento da primeira conversa. -->
+                  <p>Resposta em preparação.</p>
+                </div>
+              </div>
+              <div class="faq__item">
+                <h3><button id="faq-pergunta-2" class="faq__question" type="button" aria-expanded="true" aria-controls="faq-resposta-2" disabled><span class="faq__text">Qual a diferença entre curadoria, assessoria e cerimonial?</span><span class="faq__symbol" aria-hidden="true"></span></button></h3>
+                <div id="faq-resposta-2" class="faq__answer" role="region" aria-labelledby="faq-pergunta-2">
+                  <!-- Preencher: diferença entre os serviços conforme prompt.md. -->
+                  <p>Resposta em preparação.</p>
+                </div>
+              </div>
+              <div class="faq__item">
+                <h3><button id="faq-pergunta-3" class="faq__question" type="button" aria-expanded="true" aria-controls="faq-resposta-3" disabled><span class="faq__text">Em quais regiões vocês atendem?</span><span class="faq__symbol" aria-hidden="true"></span></button></h3>
+                <div id="faq-resposta-3" class="faq__answer" role="region" aria-labelledby="faq-pergunta-3">
+                  <!-- Preencher: cidades e regiões oficialmente atendidas. -->
+                  <p>Resposta em preparação.</p>
+                </div>
+              </div>
+              <div class="faq__item">
+                <h3><button id="faq-pergunta-4" class="faq__question" type="button" aria-expanded="true" aria-controls="faq-resposta-4" disabled><span class="faq__text">Com quanto tempo de antecedência devo contratar?</span><span class="faq__symbol" aria-hidden="true"></span></button></h3>
+                <div id="faq-resposta-4" class="faq__answer" role="region" aria-labelledby="faq-pergunta-4">
+                  <!-- Preencher: orientação oficial sobre antecedência. -->
+                  <p>Resposta em preparação.</p>
+                </div>
+              </div>
+              <div class="faq__item">
+                <h3><button id="faq-pergunta-5" class="faq__question" type="button" aria-expanded="true" aria-controls="faq-resposta-5" disabled><span class="faq__text">Posso contratar somente o cerimonial?</span><span class="faq__symbol" aria-hidden="true"></span></button></h3>
+                <div id="faq-resposta-5" class="faq__answer" role="region" aria-labelledby="faq-pergunta-5">
+                  <!-- Preencher: disponibilidade e condições do cerimonial avulso. -->
+                  <p>Resposta em preparação.</p>
+                </div>
+              </div>
+              <div class="faq__item">
+                <h3><button id="faq-pergunta-6" class="faq__question" type="button" aria-expanded="true" aria-controls="faq-resposta-6" disabled><span class="faq__text">Como funciona o processo?</span><span class="faq__symbol" aria-hidden="true"></span></button></h3>
+                <div id="faq-resposta-6" class="faq__answer" role="region" aria-labelledby="faq-pergunta-6">
+                  <!-- Preencher: descrição oficial do processo disponível em prompt.md. -->
+                  <p>Resposta em preparação.</p>
+                </div>
+              </div>
+              <div class="faq__item">
+                <h3><button id="faq-pergunta-7" class="faq__question" type="button" aria-expanded="true" aria-controls="faq-resposta-7" disabled><span class="faq__text">Como solicitar um orçamento?</span><span class="faq__symbol" aria-hidden="true"></span></button></h3>
+                <div id="faq-resposta-7" class="faq__answer" role="region" aria-labelledby="faq-pergunta-7">
+                  <!-- Preencher: canal oficial e informações necessárias ao orçamento. -->
+                  <p>Resposta em preparação.</p>
+                </div>
+              </div>
+            </div>
+            <!-- Trocar por uma versão reduzida do logo oficial quando estiver disponível. -->
+            <p class="signature faq__signature"><span>Weiri Borges</span><span>Assessoria &amp; Cerimonial</span></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="contato" class="contact" aria-labelledby="contato-titulo">
+        <div class="contact__invitation">
+          <div class="container contact__inner">
+            <h2 id="contato-titulo">Seu grande dia começa muito antes <em>do altar.</em></h2>
+            <p class="contact__text">Começa quando vocês encontram alguém que entende o que esse momento significa e escolhe cuidar de cada detalhe junto com vocês.</p>
+            <a class="button contact__cta" href="https://wa.me/5564992104641?text=Ol%C3%A1%2C%20Weiri!%20Gostaria%20de%20agendar%20uma%20conversa%20sobre%20meu%20evento." target="_blank" rel="noopener noreferrer">QUERO AGENDAR UMA CONVERSA<span class="visually-hidden"> pelo WhatsApp (abre em nova aba)</span></a>
+          </div>
+        </div>
+        <div class="container contact__layout">
+          <form id="formulario-contato" class="contact-form" method="post" aria-labelledby="formulario-titulo" aria-describedby="formulario-aviso">
+              <h3 id="formulario-titulo">Conte um pouco sobre o seu evento.</h3>
+              <p id="formulario-aviso" class="contact-form__notice">Este formulário ainda não envia mensagens. Você pode validar os dados abaixo; para entrar em contato, use o WhatsApp.</p>
+              <p class="contact-form__required">Campos com * são obrigatórios.</p>
+              <!-- Habilitado somente após registrar o bloqueio do envio nativo. -->
+              <fieldset id="contato-campos" disabled>
+                <legend class="visually-hidden">Dados de contato e do evento</legend>
+                <div class="contact-form__grid">
+                  <div class="contact-field"><label for="nome">Nome <span aria-hidden="true">*</span></label><input id="nome" name="nome" type="text" autocomplete="name" maxlength="100" required aria-describedby="nome-erro"><p id="nome-erro" class="contact-field__error"></p></div>
+                  <div class="contact-field"><label for="whatsapp">WhatsApp <span aria-hidden="true">*</span></label><input id="whatsapp" name="whatsapp" type="tel" autocomplete="tel" maxlength="20" required aria-describedby="whatsapp-erro"><p id="whatsapp-erro" class="contact-field__error"></p></div>
+                  <div class="contact-field"><label for="tipo-evento">Tipo de evento <span aria-hidden="true">*</span></label><input id="tipo-evento" name="tipoEvento" type="text" autocomplete="off" maxlength="80" required aria-describedby="tipo-evento-erro"><p id="tipo-evento-erro" class="contact-field__error"></p></div>
+                  <div class="contact-field"><label for="data-evento">Data do evento (opcional)</label><input id="data-evento" name="dataEvento" type="date" autocomplete="off" min="1900-01-01" max="9999-12-31" aria-describedby="data-evento-erro"><p id="data-evento-erro" class="contact-field__error"></p></div>
+                  <div class="contact-field contact-field--full"><label for="mensagem">Mensagem <span aria-hidden="true">*</span></label><textarea id="mensagem" name="mensagem" rows="5" autocomplete="off" maxlength="2000" required aria-describedby="mensagem-ajuda mensagem-erro"></textarea><p id="mensagem-ajuda" class="contact-field__hint">Até 2.000 caracteres.</p><p id="mensagem-erro" class="contact-field__error"></p></div>
+                </div>
+                <div class="contact-form__honeypot" aria-hidden="true"><label for="website">Deixe este campo vazio</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off" maxlength="100"></div>
+                <button class="button contact-form__submit" type="submit"><span class="button__label">VALIDAR MENSAGEM</span></button>
+              </fieldset>
+              <p id="formulario-status" class="contact-form__status" role="status" aria-live="polite" aria-atomic="true"></p>
+              <noscript><p>Ative o JavaScript para validar este formulário ou entre em contato pelo WhatsApp acima.</p></noscript>
+            </form>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-layout">
+        <div class="footer-mark">
+          <picture class="footer-logo">
+            <source srcset="assets/images/logofake2.webp" type="image/webp">
+            <img src="assets/images/logofake2.png" width="2160" height="1909" alt="Logotipo da Weiri Borges: flor de lótus estilizada." loading="lazy" decoding="async">
+          </picture>
+          <div>
+            <p class="footer-brand">Weiri Borges</p>
+            <p class="footer-descriptor">Assessoria &amp; Cerimonial</p>
+          </div>
+        </div>
+        <figure class="footer-map">
+          <svg class="footer-map__svg" viewBox="0 0 480 300" role="img" aria-labelledby="mapa-titulo mapa-desc" focusable="false">
+              <title id="mapa-titulo">Regiões atendidas</title>
+              <desc id="mapa-desc">Ilustração esquemática, fora de escala, das regiões de São Luís de Montes Belos e de Goiânia. Não indica endereço comercial.</desc>
+              <defs>
+                <linearGradient id="mapa-ouro" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="#e2c690"/><stop offset="0.5" stop-color="#fffaf0"/><stop offset="1" stop-color="#e2c690"/>
+                </linearGradient>
+              </defs>
+              <g stroke="#f7f5f0" stroke-opacity="0.16" stroke-width="1" fill="none">
+                <path d="M0 50H480M0 100H480M0 150H480M0 200H480M0 250H480"/>
+                <path d="M60 0V300M120 0V300M180 0V300M240 0V300M300 0V300M360 0V300M420 0V300"/>
+              </g>
+              <g fill="none" stroke="url(#mapa-ouro)" stroke-width="1.2">
+                <circle cx="150" cy="140" r="60" stroke-opacity="0.7"/>
+                <circle cx="340" cy="125" r="60" stroke-opacity="0.7"/>
+                <path d="M150 140Q245 70 340 125" stroke-dasharray="3 6"/>
+              </g>
+              <g fill="url(#mapa-ouro)"><circle cx="150" cy="140" r="5"/><circle cx="340" cy="125" r="5"/></g>
+              <g class="footer-map__label" fill="#ffffff" text-anchor="middle">
+                <text x="150" y="222">São Luís de Montes Belos</text>
+                <text x="340" y="207">Goiânia</text>
+              </g>
+              <text class="footer-map__note" x="16" y="286" fill="#f7f5f0" fill-opacity="0.7">Região atendida · ilustração fora de escala</text>
+            </svg>
+        </figure>
+        <div class="footer-info">
+          <div class="footer-block">
+            <p class="footer-label">Atendimento</p>
+            <p>São Luís de Montes Belos e região</p>
+            <p>Goiânia e região</p>
+            <p>Horário: 8h às 18h</p>
+          </div>
+          <nav class="footer-block footer-contact" aria-label="Canais de contato">
+            <p class="footer-label">Contato</p>
+            <a href="https://wa.me/5564992104641?text=Ol%C3%A1%2C%20Weiri!%20Gostaria%20de%20agendar%20uma%20conversa%20sobre%20meu%20evento." target="_blank" rel="noopener noreferrer">WhatsApp · (64) 99210-4641<span class="visually-hidden"> (abre em nova aba)</span></a>
+            <a href="mailto:weiborgescerimonial@gmail.com">weiborgescerimonial@gmail.com</a>
+            <a href="https://www.instagram.com/weiriborgescerimonial/" target="_blank" rel="noopener noreferrer">Instagram · @weiriborgescerimonial<span class="visually-hidden"> (abre em nova aba)</span></a>
+          </nav>
+        </div>
+        <p class="footer-legal">© 2026 Weiri Borges Assessoria &amp; Cerimonial</p>
+      </div>
+    </footer>
+  </body>
+</html>
