@@ -24,7 +24,7 @@ const server = createServer(async (req, res) => {
   try {
     const data = await readFile(path);
     for (const [name, value] of Object.entries(headers)) if (name !== 'Strict-Transport-Security') res.setHeader(name, value);
-    res.setHeader('Content-Type', ({ '.ttf': 'font/ttf', '.woff2': 'font/woff2', '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.svg': 'image/svg+xml', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.xml': 'application/xml', '.txt': 'text/plain; charset=utf-8' })[extname(path)]);
+    res.setHeader('Content-Type', ({ '.ttf': 'font/ttf', '.woff2': 'font/woff2', '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.svg': 'image/svg+xml', '.jpg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp', '.xml': 'application/xml', '.txt': 'text/plain; charset=utf-8' })[extname(path)]);
     res.end(data);
   } catch { res.writeHead(404); res.end(); }
 });
@@ -95,8 +95,10 @@ try {
   await call('Emulation.setDeviceMetricsOverride', { width:390,height:900,deviceScaleFactor:1,mobile:false }); await delay(100);
   await ev('document.querySelector(".menu-toggle").focus()'); await key('Enter','Enter',13,'\r'); check(await ev('!document.querySelector(".site-nav").hidden'), 'Menu mobile por teclado'); await key('Escape','Escape',27);
   await ev('document.querySelector("form").requestSubmit()'); await delay(100); check(await ev('document.activeElement.id==="nome"&&document.querySelectorAll(".contact-field [aria-invalid=true]").length===4'), 'Formulário: erros e foco');
-  await ev('Object.entries({nome:"Teste",whatsapp:"64992104641","tipo-evento":"Teste",mensagem:"<img src=x onerror=alert(1)>"}).forEach(([id,v])=>document.getElementById(id).value=v);document.querySelector("form").requestSubmit()');await delay(100);
+  // O envio abre o WhatsApp em nova aba; aqui a abertura é registrada, sem navegar.
+  await ev('window.__opened=[];window.open=(u,t)=>{window.__opened.push([u,t]);return {opener:1}};Object.entries({nome:"Teste",whatsapp:"64992104641","tipo-evento":"Teste",mensagem:"<img src=x onerror=alert(1)>"}).forEach(([id,v])=>document.getElementById(id).value=v);document.querySelector("form").requestSubmit()');await delay(100);
   check(await ev('document.getElementById("formulario-status").dataset.state==="success"&&!document.querySelector("img[src=x]")&&localStorage.length===0&&sessionStorage.length===0'), 'Formulário: texto não executado, sem persistência');
+  check(await ev('(()=>{const [u,t]=window.__opened[0]||[];const url=new URL(u);return window.__opened.length===1&&t==="_blank"&&url.origin==="https://wa.me"&&url.pathname==="/5564992104641"&&url.searchParams.get("text").includes("*Mensagem:*\\n<img src=x onerror=alert(1)>")})()'), 'Formulário: mensagem formatada aberta no WhatsApp oficial');
   await ev('document.getElementById("whatsapp").value="123";document.getElementById("mensagem").value="x".repeat(2001);document.querySelector("form").requestSubmit()');await delay(100);
   check(await ev('["whatsapp","mensagem"].every(id=>document.getElementById(id).getAttribute("aria-invalid")==="true")'),'Telefone e limite da mensagem');
   await ev('document.getElementById("website").value="spam";document.querySelector("form").requestSubmit()');await delay(100);
@@ -109,7 +111,7 @@ try {
   // data: do ícone nativo do input date é recurso interno, não tráfego de rede.
   const unexpectedRequests = requests.filter(r=>r.method!=='GET'||/^https?:/.test(r.url)&&!r.url.startsWith('http://127.0.0.1:8088/'));
   check(!unexpectedRequests.length, 'Sem envio de dados ou recursos externos');
-  const photoBytes = 93340 + 157376;
+  const photoBytes = await ev('performance.getEntriesByType("resource").filter(r=>r.initiatorType==="img").reduce((s,r)=>s+r.encodedBodySize,0)');
   const results = { date:new Date().toISOString(), environment:'Chrome headless local; sem Lighthouse, PageSpeed, Search Console ou teste de campo', checks, contrast, photoBytes, errors, hostingHeaders:'Somente servidor local de auditoria; HSTS não aplicado em HTTP local. Produção não verificada.' };
   console.log('Errors',JSON.stringify(errors));check(errors.length===0,'Console, CSP e rede sem erros');
   await writeFile(resolve(root,'AUDIT-RESULTS.json'),JSON.stringify(results,null,2)+'\n');

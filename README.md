@@ -1,6 +1,13 @@
 # Weiri Borges — fundação e seções iniciais
 
-**Estado atual (etapa 10):** entrega e checklist em [FINALIZACAO.md](FINALIZACAO.md).
+**Atualização (outubro/2026):** logotipos e fotografias definitivas em
+`assets/images/web/` (geradas por `scripts/optimize-images.mjs`, conferidas por
+`scripts/check-images.mjs`); WhatsApp centralizado em `js/config.js`; formulário
+abre o WhatsApp com a mensagem pronta; destaque "Ao vivo" no banner (`js/live.js`)
+com painel em `/admin/` e Supabase — configuração e uso em
+[supabase/LEIAME.md](supabase/LEIAME.md). As notas abaixo são históricas.
+
+**Estado anterior (etapa 10):** entrega e checklist em [FINALIZACAO.md](FINALIZACAO.md).
 Auditoria em [AUDITORIA.md](AUDITORIA.md), evidências atualizadas
 em [AUDIT-RESULTS.json](AUDIT-RESULTS.json) e publicação em [DEPLOY.md](DEPLOY.md).
 E-mail e Instagram oficiais já estão ativos no footer. As notas das etapas abaixo

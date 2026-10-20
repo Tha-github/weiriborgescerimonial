@@ -128,14 +128,24 @@
     });
   }
 
+  // Número oficial definido em js/config.js; o href do HTML é o fallback sem JavaScript.
+  const WHATSAPP_NUMBER = (window.WEIRI_CONFIG && window.WEIRI_CONFIG.whatsapp) || '5564992104641';
+
+  function whatsappUrl(message) {
+    return 'https://wa.me/' + WHATSAPP_NUMBER + (message ? '?text=' + encodeURIComponent(message) : '');
+  }
+
+  function initWhatsappLinks() {
+    document.querySelectorAll('a[data-whatsapp]').forEach((link) => {
+      link.href = whatsappUrl(link.dataset.whatsapp);
+    });
+  }
+
   function initContactForm() {
     const form = document.querySelector('#formulario-contato');
     if (!form) return;
     const fields = [...form.querySelectorAll('.contact-field input, .contact-field textarea')];
-    const submit = form.querySelector('[type="submit"]');
-    const submitLabel = submit.querySelector('.button__label') || submit;
     const status = document.getElementById('formulario-status');
-    let busy = false;
 
     function validate(field) {
       const value = field.value.trim();
@@ -153,53 +163,63 @@
       field.addEventListener('blur', () => validate(field));
       field.addEventListener('input', () => {
         if (field.getAttribute('aria-invalid') === 'true') validate(field);
-        if (!busy) { status.textContent = ''; delete status.dataset.state; }
+        status.textContent = ''; delete status.dataset.state;
       });
     });
 
-    form.addEventListener('submit', async (event) => {
+    function formatDate(value) {
+      const [year, month, day] = value.split('-');
+      return day && month && year ? day + '/' + month + '/' + year : value;
+    }
+
+    function buildMessage() {
+      const value = (name) => form.elements[name].value.trim();
+      const lines = [
+        'Olá, Weiri! Vim pelo site e gostaria de conversar sobre o meu evento.',
+        '',
+        '*Nome:* ' + value('nome'),
+        '*WhatsApp:* ' + value('whatsapp'),
+        '*Tipo de evento:* ' + value('tipoEvento'),
+      ];
+      if (value('dataEvento')) lines.push('*Data do evento:* ' + formatDate(value('dataEvento')));
+      lines.push('', '*Mensagem:*', value('mensagem'));
+      return lines.join('\n');
+    }
+
+    // Síncrono de propósito: navegadores só permitem abrir a nova aba
+    // dentro do mesmo gesto do usuário (clique ou Enter).
+    form.addEventListener('submit', (event) => {
       event.preventDefault();
-      if (busy) return;
-      busy = true;
-      submit.disabled = true;
-      submitLabel.textContent = 'VALIDANDO…';
-      form.setAttribute('aria-busy', 'true');
-      status.dataset.state = 'loading';
-      status.textContent = 'Validando os dados no seu navegador…';
-      try {
-        // Permite pintar o estado de validação; não simula espera de rede.
-        await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
-        if (form.elements.website.value.trim()) {
-          status.dataset.state = 'error';
-          status.textContent = 'Não foi possível validar. Entre em contato pelo WhatsApp.';
-          return;
-        }
-        const invalid = fields.filter((field) => !validate(field));
-        if (invalid.length) {
-          status.dataset.state = 'error';
-          status.textContent = 'Revise os campos destacados. Nenhuma mensagem foi enviada.';
-          invalid[0].focus();
-          return;
-        }
-        // Integração futura: enviar somente para endpoint aprovado, com validação
-        // no servidor. Mostrar sucesso de envio somente após confirmação real.
-        status.dataset.state = 'success';
-        status.textContent = 'Dados validados. Nada foi enviado ou salvo pelo site. Para agendar uma conversa, entre em contato pelo WhatsApp.';
-      } catch {
+      if (form.elements.website.value.trim()) {
         status.dataset.state = 'error';
-        status.textContent = 'Não foi possível concluir a validação. Nada foi enviado. Entre em contato pelo WhatsApp.';
-      } finally {
-        busy = false;
-        submit.disabled = false;
-        submitLabel.textContent = 'VALIDAR MENSAGEM';
-        form.removeAttribute('aria-busy');
+        status.textContent = 'Não foi possível enviar. Entre em contato pelo WhatsApp acima.';
+        return;
       }
+      const invalid = fields.filter((field) => !validate(field));
+      if (invalid.length) {
+        status.dataset.state = 'error';
+        status.textContent = 'Revise os campos destacados. Nenhuma mensagem foi enviada.';
+        invalid[0].focus();
+        return;
+      }
+      const url = whatsappUrl(buildMessage());
+      const opened = window.open(url, '_blank');
+      if (opened) {
+        opened.opener = null;
+      } else {
+        // Bloqueador de pop-ups: segue na mesma aba.
+        window.location.href = url;
+        return;
+      }
+      status.dataset.state = 'success';
+      status.textContent = 'Abrimos o WhatsApp com a sua mensagem. Para concluir, confirme o envio no WhatsApp.';
     });
     form.noValidate = true;
     document.getElementById('contato-campos').disabled = false;
   }
 
   init();
+  initWhatsappLinks();
   initHeaderScroll();
   initEditorialMotion();
   initAccordion();

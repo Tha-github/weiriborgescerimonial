@@ -8,7 +8,9 @@ do documento; não transforma os outros controles em headers HTTP.
 
 1. Confirmar a URL HTTPS definitiva e concluir o conteúdo provisório: missão,
    conceito oficial, FAQ, logo, fotografias e imagem social. O favicon atual é
-   um monograma provisório. O formulário continua com validação local apenas.
+   um monograma provisório. O formulário valida localmente e abre o WhatsApp
+   com a mensagem pronta; não há envio por servidor.
+   Destaque "Ao vivo" e painel `/admin/`: ver `supabase/LEIAME.md`.
 2. Se alterar o JSON-LD, executar `node scripts/security-policy.mjs --sync`.
    Isso recalcula o hash SHA-256 do bloco exato e sincroniza a CSP da página e
    `config/http-headers.json`. O JSON-LD é dado estático não executável; não há
@@ -41,7 +43,7 @@ plataforma que não o interpreta.
 
 | Header | Preparação e dependência |
 | --- | --- |
-| Content-Security-Policy | Recursos locais; hash do JSON-LD; bloqueia conexões e envio de formulários. `frame-ancestors 'none'` somente no header. |
+| Content-Security-Policy | Recursos locais; hash do JSON-LD; conexões somente com `https://*.supabase.co` (destaque "Ao vivo"); bloqueia envio de formulários. `frame-ancestors 'none'` somente no header. |
 | X-Content-Type-Options | `nosniff`; servir CSS, JS, SVG e WebP com MIME correto. |
 | Referrer-Policy | `strict-origin-when-cross-origin`; há também fallback meta na página. |
 | Permissions-Policy | Câmera, microfone, localização, pagamento e USB desabilitados. |

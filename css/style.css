@@ -179,9 +179,9 @@ a:hover { text-decoration-thickness: 0.14em; }
 }
 .site-header.is-scrolled { border-bottom-color: rgba(211, 180, 127, 0.6); }
 .header-layout { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-4) var(--space-6); }
-.brand { display: inline-flex; flex-direction: column; color: var(--color-brand); text-decoration: none; }
-.brand__name { font-family: var(--font-heading); font-size: 1.75rem; line-height: 1; letter-spacing: -0.02em; }
-.brand__descriptor { margin-block-start: 0.3rem; font-size: 0.5625rem; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: var(--color-action); }
+.brand { display: inline-flex; align-items: center; min-height: 2.75rem; color: var(--color-brand); text-decoration: none; }
+/* Logo do cabeçalho: altura fixa, largura proporcional; contain evita distorção se a largura for limitada. */
+.brand__logo { width: auto; height: clamp(2.75rem, 2.2rem + 1.4vw, 3.25rem); max-width: min(15rem, 60vw); object-fit: contain; object-position: left center; }
 .menu-toggle {
   display: inline-flex;
   align-items: center;
@@ -248,7 +248,29 @@ a:hover { text-decoration-thickness: 0.14em; }
 .hero__logo { position: absolute; z-index: 0; left: 50%; top: 8%; width: min(112%, 40rem); transform: translateX(-50%); opacity: 0.92; pointer-events: none; }
 .hero__logo img { width: 100%; height: auto; }
 .hero__photo { position: relative; z-index: 1; }
-.hero__image { display: block; width: auto; max-width: 100%; height: clamp(22rem, 108vw, 30rem); }
+/* Largura proporcional à altura; se a largura for limitada, recorta as laterais e preserva o rosto no alto. */
+.hero__image { display: block; width: auto; max-width: 100%; height: clamp(22rem, 108vw, 30rem); object-fit: cover; object-position: 50% 15%; }
+
+/* Destaque "Ao vivo": oculto por padrão; js/live.js exibe somente com transmissão ativa e válida. */
+.hero-live { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-2); max-width: 32rem; margin-block-end: clamp(1.25rem, 2.5vw, 2rem); padding: 0.875rem 1.125rem; border: 1px solid var(--color-border); border-inline-start: 2px solid #d3b47f; background: rgba(255, 255, 255, 0.72); line-height: 1.5; }
+.hero-live__badge { display: inline-flex; align-items: center; gap: 0.5rem; max-width: none; color: var(--color-action); font-size: 0.625rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; }
+.hero-live__dot { width: 0.4375rem; height: 0.4375rem; border-radius: 50%; background: #a8473b; box-shadow: 0 0 0 0 rgba(168, 71, 59, 0.45); }
+.hero-live__body { min-width: 0; }
+.hero-live__title { max-width: none; color: var(--color-brand); font-family: var(--font-heading); font-size: clamp(1.25rem, 1rem + 0.6vw, 1.5rem); line-height: 1.15; letter-spacing: -0.015em; }
+.hero-live__text { max-width: 44ch; margin-block-start: 0.25rem; color: var(--color-muted); font-size: 0.875rem; }
+.hero-live__link { display: inline-flex; align-items: center; gap: var(--space-3); justify-self: start; min-height: 2.75rem; color: var(--color-action); font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; text-decoration-thickness: 1px; text-underline-offset: 0.5em; }
+.hero-live__link:hover { color: var(--color-brand); }
+@media (min-width: 30rem) {
+  .hero-live { grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--space-6); align-items: end; }
+  .hero-live__badge { grid-column: 1 / -1; }
+  .hero-live__link { justify-self: end; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-live:not([hidden]) { animation: live-enter 420ms ease-out; }
+  .hero-live__dot { animation: live-pulse 2s ease-out infinite; }
+  @keyframes live-enter { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes live-pulse { 0% { box-shadow: 0 0 0 0 rgba(168, 71, 59, 0.45); } 70%, 100% { box-shadow: 0 0 0 0.5rem rgba(168, 71, 59, 0); } }
+}
 @media (min-width: 64rem) {
   .hero__layout { grid-template-columns: minmax(0, 45fr) minmax(0, 55fr); column-gap: clamp(1rem, 3vw, 4rem); min-height: calc(100svh - var(--header-h)); }
   .hero__content { align-self: center; padding-block: 2rem 3rem; }
@@ -282,18 +304,21 @@ a:hover { text-decoration-thickness: 0.14em; }
 .gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; max-width: 74rem; margin: var(--space-12) auto 0; }
 .gallery__item { position: relative; overflow: hidden; aspect-ratio: 1; min-width: 0; background: var(--color-border); }
 .gallery__item img, .gallery__item picture { width: 100%; height: 100%; }
-.gallery__item img { object-fit: cover; }
-/* Recortes editoriais diferentes a partir das fotografias ilustrativas. */
-.gallery__item--1 img { object-position: 50% 58%; }
-.gallery__item--3 img { object-position: 50% 88%; }
-.gallery__item--5 img { object-position: 40% 62%; transform: scale(1.7); transform-origin: 40% 62%; }
-.gallery__item--7 img { object-position: 50% 80%; transform: scale(1.8); transform-origin: 45% 78%; }
-.gallery__item--9 img { object-position: 85% 40%; transform: scale(1.35); transform-origin: 85% 40%; }
-.gallery__item--11 img { object-position: 50% 6%; }
+.gallery__item img { object-fit: cover; object-position: 50% 50%; }
+/* Fotos verticais (2:3) em células quadradas/5:4: enquadramento que preserva os rostos. */
+.gallery__item--1 img { object-position: 50% 42%; }
+.gallery__item--2 img { object-position: 50% 32%; }
+.gallery__item--3 img { object-position: 50% 62%; }
+.gallery__item--4 img { object-position: 50% 24%; }
+.gallery__item--5 img { object-position: 50% 28%; }
+.gallery__item--6 img { object-position: 50% 34%; }
+.gallery__item--7 img { object-position: 50% 30%; }
+.gallery__item--8 img { object-position: 50% 44%; }
+.gallery__item--9 img { object-position: 50% 28%; }
 @media (min-width: 48rem) {
   .gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
   .gallery__item { aspect-ratio: 5 / 4; }
-  .gallery__item--4, .gallery__item--5, .gallery__item--6, .gallery__item--7, .gallery__item--8, .gallery__item--9 { aspect-ratio: 1; }
+  .gallery__item--4, .gallery__item--5, .gallery__item--6 { aspect-ratio: 1; }
 }
 @media (min-width: 64rem) {
   .about__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 1.5rem; align-items: end; }
@@ -304,15 +329,17 @@ a:hover { text-decoration-thickness: 0.14em; }
 
 /* Missão: frase centralizada, com bastante respiro. */
 .mission { background: var(--color-brand); padding-block: var(--section-space) calc(var(--section-space) + clamp(2rem, 5vw, 4.5rem)); text-align: center; }
+/* Destaque em dourado claro em todas as larguras. */
+.mission__quote em { color: var(--gold-fallback); background-image: var(--gold); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .mission__quote { max-width: 22ch; margin-inline: auto; color: var(--color-white); font-family: var(--font-heading); font-size: clamp(2rem, 1rem + 4vw, 4.5rem); line-height: 1.04; letter-spacing: -0.03em; text-wrap: balance; }
 
 /* Panorâmicas: fotografias largas que atravessam a fronteira entre duas seções. */
 .panorama { position: relative; z-index: 1; width: min(var(--container-max), calc(100% - 2 * var(--container-gutter))); margin-inline: auto; }
 .panorama img { width: 100%; height: clamp(13rem, 32vw, 24rem); object-fit: cover; background: var(--color-brand); }
 .panorama--table { margin-block-start: calc(-1 * clamp(2rem, 5vw, 4.5rem)); }
-.panorama--table img { object-position: 50% 74%; }
-.panorama__caption { padding-block-start: var(--space-3); color: var(--color-muted); font-size: 0.625rem; text-align: right; }
-.panorama__caption a { color: inherit; }
+.panorama--table img { object-position: 50% 28%; }
+/* Desktop: faixa mais baixa e larga; enquadra pelo alto para não cortar as cabeças. */
+@media (min-width: 64rem) { .panorama--table img { object-position: 50% 4%; } }
 
 /* 8. Curadoria: título em duas linhas, sequência tipográfica e frase central. */
 .curation { background: var(--color-background); padding-block: var(--section-space-lg); }
@@ -321,8 +348,8 @@ a:hover { text-decoration-thickness: 0.14em; }
 .curation h2 { font-size: var(--display-l); line-height: 1.02; white-space: nowrap; }
 .curation h2 em { display: block; }
 .curation__description { max-width: 42ch; margin-block-start: var(--space-6); color: var(--color-muted); line-height: 1.9; }
-.curation__figure { display: none; margin-block-start: var(--space-8); }
-.curation__figure img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: 30% 60%; background: var(--color-brand); }
+.curation__figure { margin-block-start: var(--space-8); }
+.curation__figure img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 58%; background: var(--color-brand); }
 .curation__path { list-style: none; padding: 0; margin: 0; border-top: var(--line); }
 .curation__path li { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); column-gap: var(--space-4); align-items: baseline; padding-block: clamp(0.75rem, 1.4vw, 1.125rem); border-bottom: var(--line); }
 .curation__no { grid-row: 1 / 3; color: var(--color-action); font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.18em; }
@@ -333,7 +360,7 @@ a:hover { text-decoration-thickness: 0.14em; }
   .curation__layout { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 1.5rem; row-gap: var(--space-12); align-items: start; }
   .curation__intro { grid-column: 1 / 7; }
   .curation__path { grid-column: 8 / 13; }
-  .curation__figure { display: block; }
+  .curation__figure img { aspect-ratio: 16 / 9; }
 }
 
 /* 9. Serviços: título, descrição e três boxes lado a lado. */
@@ -380,23 +407,20 @@ a:hover { text-decoration-thickness: 0.14em; }
 .portfolio__frame { overflow: hidden; background: var(--color-border); aspect-ratio: var(--photo-ratio); }
 .portfolio__frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .portfolio__item figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-1) var(--space-4); margin-block-start: var(--space-3); padding-block-start: var(--space-2); border-top: var(--line); color: var(--color-muted); font-size: 0.6875rem; letter-spacing: 0.06em; line-height: 1.6; }
-.portfolio__item--1 { --photo-ratio: 4 / 5; }
-.portfolio__item--2, .portfolio__item--6 { --photo-ratio: 1; }
-.portfolio__item--3 { --photo-ratio: 3 / 2; }
-.portfolio__item--4, .portfolio__item--7 { --photo-ratio: 4 / 5; }
-.portfolio__item--5 { --photo-ratio: 3 / 4; }
-.portfolio__item--8 { --photo-ratio: 16 / 9; }
-@media (min-width: 48rem) {
-  .portfolio__gallery { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--space-6); row-gap: var(--space-8); align-items: start; }
-  .portfolio__item--1 { grid-column: 1 / 8; --photo-ratio: 16 / 10; }
-  .portfolio__item--2 { grid-column: 9 / 13; --photo-ratio: 1; align-self: end; }
-  .portfolio__item--3 { grid-column: 1 / 5; --photo-ratio: 1; }
-  .portfolio__item--4 { grid-column: 6 / 13; --photo-ratio: 16 / 9; align-self: end; }
-  .portfolio__item--5 { grid-column: 1 / 5; --photo-ratio: 1; }
-  .portfolio__item--6 { grid-column: 5 / 9; --photo-ratio: 4 / 3; align-self: end; }
-  .portfolio__item--7 { grid-column: 9 / 13; --photo-ratio: 1; }
-  .portfolio__item--8 { grid-column: 1 / -1; --photo-ratio: 4 / 1; }
-}
+/* 6 fotografias verticais em composição assimétrica (3 fileiras, lados alternados). */
+.portfolio__gallery { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--space-6); row-gap: var(--space-8); align-items: start; }
+.portfolio__item--1 { grid-column: 1 / 8; --photo-ratio: 4 / 3; }
+.portfolio__item--2 { grid-column: 9 / 13; --photo-ratio: 4 / 5; align-self: end; }
+.portfolio__item--3 { grid-column: 1 / 6; --photo-ratio: 4 / 5; }
+.portfolio__item--4 { grid-column: 7 / 13; --photo-ratio: 4 / 3; align-self: end; }
+.portfolio__item--5 { grid-column: 1 / 6; --photo-ratio: 4 / 5; }
+.portfolio__item--6 { grid-column: 7 / 13; --photo-ratio: 4 / 3; align-self: end; }
+.portfolio__item--1 img { object-position: 50% 25%; }
+.portfolio__item--2 img { object-position: 50% 35%; }
+.portfolio__item--3 img { object-position: 50% 25%; }
+.portfolio__item--4 img { object-position: 50% 35%; }
+.portfolio__item--5 img { object-position: 50% 45%; }
+.portfolio__item--6 img { object-position: 45% 62%; }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .portfolio__frame img { transition: transform 400ms ease-out; }
   .portfolio__frame:hover img { transform: scale(1.015); }
@@ -427,11 +451,9 @@ a:hover { text-decoration-thickness: 0.14em; }
 }
 
 /* 13. História: banner editorial com o logo, branco e dourado. */
-.story { background: var(--color-brand); padding-block: var(--section-space-lg); text-align: center; }
-.story__banner { display: flex; flex-direction: column; align-items: center; }
-.story__logo { width: clamp(7rem, 14vw, 10.5rem); opacity: 0.06; }
-.story__logo img { width: 100%; height: auto; }
-.story h2 { max-width: 18ch; margin-block-start: var(--space-6); font-size: var(--display-l); line-height: 1.02; }
+.story { position: relative; overflow: hidden; background: var(--color-brand); padding-block: var(--section-space-lg); text-align: center; }
+.story__banner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
+.story h2 { max-width: 18ch; font-size: var(--display-l); line-height: 1.02; }
 .story__text { max-width: 44ch; margin: var(--space-6) auto 0; color: var(--color-white); line-height: 1.9; }
 .story__milestones { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-8) var(--space-16); margin-block-start: var(--space-8); }
 .story__milestone { position: relative; padding-block-start: var(--space-4); }
@@ -460,7 +482,8 @@ a:hover { text-decoration-thickness: 0.14em; }
 .faq__question[aria-expanded="true"] .faq__symbol::after { transform: scaleY(0); }
 .faq__answer { max-width: 40rem; padding: 0 var(--space-8) var(--space-8) 0; color: var(--color-muted); font-size: var(--text-small); line-height: 1.9; }
 .faq__answer p + p { margin-block-start: var(--space-4); }
-.faq__signature { justify-content: center; margin: clamp(1.25rem, 3vw, 2rem) auto 0; text-align: center; }
+.faq__signature { display: block; width: clamp(9rem, 18vw, 12rem); margin: clamp(1.5rem, 3vw, 2.25rem) auto 0; }
+.faq__signature img { width: 100%; height: auto; }
 @media (prefers-reduced-motion: no-preference) {
   .faq__answer:not([hidden]) { animation: faq-enter 180ms ease-out; }
   @keyframes faq-enter { from { opacity: 0.7; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
@@ -499,7 +522,7 @@ a:hover { text-decoration-thickness: 0.14em; }
 .site-footer { background: var(--color-action); padding-block: clamp(2.5rem, 5vw, 4rem) var(--space-6); font-size: var(--text-small); }
 .footer-layout { display: grid; gap: var(--space-8); }
 .footer-mark { display: flex; align-items: center; gap: var(--space-6); padding-block-end: var(--space-6); border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
-.footer-logo { flex: 0 0 auto; width: clamp(4rem, 8vw, 6rem); }
+.footer-logo { flex: 0 0 auto; width: clamp(12rem, 22vw, 17rem); }
 .footer-logo img { width: 100%; height: auto; }
 .footer-brand { max-width: none; color: var(--color-white); font-family: var(--font-heading); font-size: clamp(2.5rem, 1rem + 4.6vw, 5rem); line-height: 0.95; letter-spacing: -0.04em; }
 .footer-descriptor { max-width: none; margin-block-start: var(--space-3); color: var(--gold-fallback); background-image: var(--gold); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; }
@@ -514,6 +537,14 @@ a:hover { text-decoration-thickness: 0.14em; }
 .footer-contact a { display: inline-flex; min-height: 2.75rem; align-items: center; color: var(--color-white); text-decoration-color: rgba(255, 255, 255, 0.5); overflow-wrap: anywhere; }
 .footer-contact a:focus-visible { outline-color: var(--color-white); }
 .footer-legal { max-width: none; padding-block-start: var(--space-6); border-top: 1px solid rgba(255, 255, 255, 0.3); color: var(--color-white); font-size: 0.75rem; letter-spacing: 0.06em; }
+.footer-legal__sep { margin-inline: 0.4em; opacity: 0.6; }
+.footer-legal__credit { white-space: nowrap; }
+@media (max-width: 47.99rem) {
+  .footer-legal__sep { display: none; }
+  .footer-legal__credit { display: block; margin-block-start: var(--space-1); }
+}
+.footer-legal a { color: var(--color-white); text-decoration-color: rgba(255, 255, 255, 0.5); }
+.footer-legal a:focus-visible { outline-color: var(--color-white); }
 @media (min-width: 64rem) {
   .footer-layout { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 1.5rem; }
   .footer-mark, .footer-legal { grid-column: 1 / -1; }
@@ -582,8 +613,6 @@ a:hover { text-decoration-thickness: 0.14em; }
   .about__highlights { margin-block-start: var(--space-8); }
   .gallery { grid-column: 8 / 13; max-width: none; margin: 0; gap: 0.625rem; }
 
-  /* Mission: destaque em dourado claro. */
-  .mission__quote em { color: var(--gold-fallback); background-image: var(--gold); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 
   /* Serviços: título e descrição centralizados. */
   .services__intro { text-align: center; }
@@ -596,10 +625,7 @@ a:hover { text-decoration-thickness: 0.14em; }
   /* "Histórias que merecem ser lembradas" centralizado. */
   .portfolio h2 { max-width: none; text-align: center; }
 
-  /* História: título e descrição em 2 linhas, números empilhados, logo gigante ao fundo. */
-  .story { position: relative; overflow: hidden; }
-  .story__banner { position: relative; z-index: 1; }
-  .story__logo { position: absolute; z-index: -1; left: 50%; top: 50%; width: clamp(28rem, 62vw, 58rem); transform: translate(-50%, -46%); opacity: 0.05; pointer-events: none; }
+  /* História: título e descrição em 2 linhas, números empilhados. */
   .story h2 { max-width: 60rem; font-size: clamp(2rem, 1rem + 2.4vw, 3.25rem); line-height: 1.08; }
   .story__text { max-width: 58rem; }
   .story__milestones { flex-direction: column; align-items: center; gap: var(--space-6); }
@@ -670,6 +696,11 @@ h1 em, h2 em, h3 em { color: var(--color-brand); background-image: none; -webkit
   .hero__layout { justify-items: center; text-align: center; }
   .hero__content { display: contents; }
   .hero h1 { order: 1; margin-block-start: 1.75rem; text-align: center; }
+  /* Ao vivo: no topo do banner, centralizado, para ser visto sem rolar a página. */
+  .hero-live { order: 0; width: 100%; margin: 1.25rem auto 0; justify-items: center; text-align: center; }
+  .hero-live__badge, .hero-live__link { justify-self: center; }
+  .hero-live__text { margin-inline: auto; }
+  .hero-live:not([hidden]) ~ h1 { margin-block-start: 1.25rem; }
   .hero__description { order: 2; margin-inline: auto; margin-block-start: 1rem; text-align: center; }
   .hero__media { order: 3; width: 100%; margin-block-start: 1rem; -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 58%, transparent 100%); mask-image: linear-gradient(180deg, #000 0%, #000 58%, transparent 100%); }
   .hero__image { height: clamp(17rem, 78vw, 22rem); }
@@ -682,9 +713,9 @@ h1 em, h2 em, h3 em { color: var(--color-brand); background-image: none; -webkit
   .about__mission { margin-inline: auto; }
   .about__highlights { grid-template-columns: minmax(0, 1fr); text-align: center; }
   .about__highlight { align-items: center; }
-  .about__highlight dd { order: 0; }
-  .about__highlight dt { max-width: none; margin-block: 0 var(--space-2); }
-  .gallery { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.375rem; }
+  /* Número primeiro, descrição embaixo. */
+  .about__highlight dt { max-width: none; margin-block: var(--space-2) 0; }
+  .gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.375rem; }
 
   /* Curadoria: título e texto centralizados; a sequência mantém o alinhamento editorial. */
   .curation__intro { text-align: center; }
@@ -707,10 +738,6 @@ h1 em, h2 em, h3 em { color: var(--color-brand); background-image: none; -webkit
   /* Portfólio. */
   .portfolio h2 { max-width: none; text-align: center; }
 
-  /* História: mesmo banner do desktop (logo grande e translúcido ao fundo). */
-  .story { position: relative; overflow: hidden; }
-  .story__banner { position: relative; z-index: 1; }
-  .story__logo { position: absolute; z-index: -1; left: 50%; top: 50%; width: min(120vw, 34rem); transform: translate(-50%, -46%); opacity: 0.05; pointer-events: none; }
   .story h2 { max-width: none; font-size: clamp(1.625rem, 6.6vw, 2.25rem); line-height: 1.1; }
   .story__milestones { flex-direction: column; align-items: center; }
 
@@ -731,15 +758,7 @@ h1 em, h2 em, h3 em { color: var(--color-brand); background-image: none; -webkit
 
 /* Mobile: "Histórias que merecem ser lembradas" com a mesma composição assimétrica do desktop, em escala reduzida. */
 @media (max-width: 47.99rem) {
-  .portfolio__gallery { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 0.5rem; row-gap: 1rem; align-items: start; margin-block-start: var(--space-6); }
-  .portfolio__item--1 { grid-column: 1 / 8; --photo-ratio: 16 / 10; }
-  .portfolio__item--2 { grid-column: 9 / 13; --photo-ratio: 1; align-self: end; }
-  .portfolio__item--3 { grid-column: 1 / 5; --photo-ratio: 1; }
-  .portfolio__item--4 { grid-column: 6 / 13; --photo-ratio: 16 / 9; align-self: end; }
-  .portfolio__item--5 { grid-column: 1 / 5; --photo-ratio: 1; }
-  .portfolio__item--6 { grid-column: 5 / 9; --photo-ratio: 4 / 3; align-self: end; }
-  .portfolio__item--7 { grid-column: 9 / 13; --photo-ratio: 1; }
-  .portfolio__item--8 { grid-column: 1 / -1; --photo-ratio: 4 / 1; }
+  .portfolio__gallery { column-gap: 0.5rem; row-gap: 1rem; margin-block-start: var(--space-6); }
   .portfolio__item figcaption { margin-block-start: 0.375rem; padding-block-start: 0.25rem; font-size: 0.5625rem; letter-spacing: 0.04em; }
   .portfolio__item figcaption span:nth-child(2) { display: none; }
 }
@@ -755,6 +774,11 @@ h1 em, h2 em, h3 em { color: var(--color-brand); background-image: none; -webkit
 /* Mobile: botões e link mais abaixo no banner. */
 @media (max-width: 47.99rem) {
   .hero__actions { margin-block-start: 2.5rem; }
+  /* Degradê suave (curva com várias paradas) que some por completo antes da borda: a foto não parece cortada. */
+  .hero__media {
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 42%, rgba(0, 0, 0, 0.9) 52%, rgba(0, 0, 0, 0.72) 61%, rgba(0, 0, 0, 0.5) 69%, rgba(0, 0, 0, 0.3) 76%, rgba(0, 0, 0, 0.14) 83%, rgba(0, 0, 0, 0.05) 89%, transparent 94%);
+    mask-image: linear-gradient(180deg, #000 0%, #000 42%, rgba(0, 0, 0, 0.9) 52%, rgba(0, 0, 0, 0.72) 61%, rgba(0, 0, 0, 0.5) 69%, rgba(0, 0, 0, 0.3) 76%, rgba(0, 0, 0, 0.14) 83%, rgba(0, 0, 0, 0.05) 89%, transparent 94%);
+  }
 }
 
 /* Mobile: menu em tela cheia e botão só com o ícone (o texto "Menu" fica acessível, porém oculto). */
@@ -767,4 +791,20 @@ h1 em, h2 em, h3 em { color: var(--color-brand); background-image: none; -webkit
   .menu-ready .site-nav__list { justify-items: center; gap: 0.25rem; }
   .menu-ready .site-nav__list a { justify-content: center; font-size: 2.25rem; }
   .menu-ready .header-cta { margin: 0; }
+}
+/* Menu lateral (mobile/tablet): sem o "Vamos conversar". */
+@media (max-width: 69.99rem) {
+  .menu-ready .header-cta { display: none; }
+}
+
+/* Hero: "Não administrado." um pouco maior, em dourado com gradiente (afinação mais escura, legível sobre o fundo claro). */
+.hero h1 .hero__line--accent {
+  font-size: 0.86em;
+  color: #b08442;
+  background-image: linear-gradient(90deg, #a87c3c 0%, #c9a063 40%, #e2c690 58%, #c49a5c 78%, #a87c3c 100%);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

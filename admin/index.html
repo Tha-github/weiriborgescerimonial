@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src https://*.supabase.co; object-src 'none'; base-uri 'none'; form-action 'none'">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="referrer" content="no-referrer">
+    <meta name="theme-color" content="#668E8D">
+    <title>Painel | Weiri Borges</title>
+    <link rel="icon" href="../assets/icons/favicon.svg" type="image/svg+xml" sizes="any">
+    <link rel="stylesheet" href="admin.css">
+    <script src="../js/config.js" defer></script>
+    <script src="vendor/supabase-js-2.117.2.min.js" defer></script>
+    <script src="admin.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+    <header class="admin-header">
+      <div class="admin-container admin-header__layout">
+        <a class="admin-brand" href="../" aria-label="Ir para o site Weiri Borges">
+          <img src="../assets/images/web/logo1.png" width="393" height="180" alt="" decoding="async">
+        </a>
+        <div class="admin-account" hidden>
+          <span class="admin-account__email" id="admin-email"></span>
+          <button class="admin-link-button" type="button" id="botao-sair">Sair</button>
+        </div>
+      </div>
+    </header>
+
+    <main id="conteudo" class="admin-container admin-main" tabindex="-1">
+      <noscript><p class="admin-card">Ative o JavaScript para usar o painel.</p></noscript>
+
+      <section class="admin-view" data-view="loading" aria-label="Carregando">
+        <p class="admin-loading"><span class="admin-spinner" aria-hidden="true"></span>Carregando…</p>
+      </section>
+
+      <section class="admin-view admin-card admin-card--narrow" data-view="config" aria-labelledby="config-titulo" hidden>
+        <h1 id="config-titulo">Painel ainda não configurado</h1>
+        <p>Preencha <code>supabaseUrl</code> e <code>supabaseKey</code> em <code>js/config.js</code>, conforme o guia <code>supabase/LEIAME.md</code>.</p>
+      </section>
+
+      <section class="admin-view admin-card admin-card--narrow" data-view="signup" aria-labelledby="cadastro-titulo" hidden>
+        <p class="admin-eyebrow">Primeiro acesso</p>
+        <h1 id="cadastro-titulo">Criar cadastro</h1>
+        <p class="admin-hint">Este cadastro é feito uma única vez e será a conta administradora do site. Depois dele, o painel passa a pedir apenas o login.</p>
+        <form id="form-cadastro" class="admin-form" novalidate>
+          <div class="admin-field">
+            <label for="cadastro-email">E-mail</label>
+            <input id="cadastro-email" name="email" type="email" autocomplete="username" inputmode="email" required maxlength="254" aria-describedby="cadastro-email-erro">
+            <p class="admin-error" id="cadastro-email-erro"></p>
+          </div>
+          <div class="admin-field">
+            <label for="cadastro-senha">Senha</label>
+            <div class="admin-password">
+              <input id="cadastro-senha" name="password" type="password" autocomplete="new-password" required minlength="8" maxlength="72" aria-describedby="cadastro-senha-ajuda cadastro-senha-erro">
+              <button class="admin-link-button" type="button" data-toggle-password="cadastro-senha" aria-controls="cadastro-senha" aria-pressed="false">Mostrar</button>
+            </div>
+            <p class="admin-hint" id="cadastro-senha-ajuda">Mínimo de 8 caracteres.</p>
+            <p class="admin-error" id="cadastro-senha-erro"></p>
+          </div>
+          <div class="admin-field">
+            <label for="cadastro-confirmar">Confirmar senha</label>
+            <input id="cadastro-confirmar" name="confirm" type="password" autocomplete="new-password" required maxlength="72" aria-describedby="cadastro-confirmar-erro">
+            <p class="admin-error" id="cadastro-confirmar-erro"></p>
+          </div>
+          <button class="admin-button" type="submit">Criar cadastro</button>
+          <p class="admin-status" id="cadastro-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="admin-view admin-card admin-card--narrow" data-view="login" aria-labelledby="login-titulo" hidden>
+        <p class="admin-eyebrow">Painel administrativo</p>
+        <h1 id="login-titulo">Entrar</h1>
+        <form id="form-login" class="admin-form" novalidate>
+          <div class="admin-field">
+            <label for="login-email">E-mail</label>
+            <input id="login-email" name="email" type="email" autocomplete="username" inputmode="email" required maxlength="254">
+          </div>
+          <div class="admin-field">
+            <label for="login-senha">Senha</label>
+            <div class="admin-password">
+              <input id="login-senha" name="password" type="password" autocomplete="current-password" required maxlength="200">
+              <button class="admin-link-button" type="button" data-toggle-password="login-senha" aria-controls="login-senha" aria-pressed="false">Mostrar</button>
+            </div>
+          </div>
+          <button class="admin-button" type="submit">Entrar</button>
+          <p class="admin-status" id="login-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="admin-view admin-card admin-card--narrow" data-view="denied" aria-labelledby="negado-titulo" hidden>
+        <h1 id="negado-titulo">Acesso não autorizado</h1>
+        <p>Esta conta entrou corretamente, mas não tem permissão para editar o site.</p>
+        <button class="admin-button admin-button--ghost" type="button" data-sign-out>Sair e usar outra conta</button>
+      </section>
+
+      <section class="admin-view" data-view="panel" aria-labelledby="painel-titulo" hidden>
+        <div class="admin-intro">
+          <p class="admin-eyebrow">Banner principal</p>
+          <h1 id="painel-titulo" tabindex="-1">Transmissão ao vivo</h1>
+        </div>
+
+        <div class="admin-card admin-summary" aria-live="polite">
+          <div>
+            <p class="admin-pill" id="situacao" data-active="false"><span class="admin-pill__dot" aria-hidden="true"></span><span id="situacao-texto">Fora do ar</span></p>
+            <p class="admin-summary__meta" id="atualizado-em"></p>
+          </div>
+          <button class="admin-button" type="button" id="botao-alternar">Publicar agora</button>
+        </div>
+
+        <div class="admin-grid">
+          <form id="form-live" class="admin-card admin-form" novalidate aria-labelledby="form-live-titulo">
+            <h2 id="form-live-titulo">Dados da transmissão</h2>
+            <div class="admin-field">
+              <label for="live-titulo">Título <span aria-hidden="true">*</span></label>
+              <input id="live-titulo" name="title" type="text" maxlength="80" autocomplete="off" required aria-describedby="live-titulo-ajuda live-titulo-erro">
+              <p class="admin-hint" id="live-titulo-ajuda">Ex.: Cerimônia de casamento. Até 80 caracteres.</p>
+              <p class="admin-error" id="live-titulo-erro"></p>
+            </div>
+            <div class="admin-field">
+              <label for="live-descricao">Descrição curta</label>
+              <textarea id="live-descricao" name="description" rows="3" maxlength="200" autocomplete="off" aria-describedby="live-descricao-ajuda live-descricao-erro"></textarea>
+              <p class="admin-hint" id="live-descricao-ajuda">Ex.: Acompanhe esse momento especial ao vivo. Até 200 caracteres.</p>
+              <p class="admin-error" id="live-descricao-erro"></p>
+            </div>
+            <div class="admin-field">
+              <label for="live-url">Link da transmissão <span aria-hidden="true">*</span></label>
+              <input id="live-url" name="url" type="url" inputmode="url" maxlength="500" autocomplete="off" spellcheck="false" placeholder="https://www.youtube.com/live/..." required aria-describedby="live-url-ajuda live-url-erro">
+              <p class="admin-hint" id="live-url-ajuda">Cole o link do YouTube, Instagram ou outra plataforma. Precisa começar com https://</p>
+              <p class="admin-error" id="live-url-erro"></p>
+            </div>
+            <div class="admin-field">
+              <label for="live-botao">Texto do botão <span aria-hidden="true">*</span></label>
+              <input id="live-botao" name="button_text" type="text" maxlength="40" autocomplete="off" required aria-describedby="live-botao-ajuda live-botao-erro">
+              <p class="admin-hint" id="live-botao-ajuda">Ex.: Assistir à cerimônia. Até 40 caracteres.</p>
+              <p class="admin-error" id="live-botao-erro"></p>
+            </div>
+            <div class="admin-switch">
+              <input id="live-ativa" name="is_active" type="checkbox" role="switch" aria-describedby="live-ativa-ajuda">
+              <label for="live-ativa">Exibir no site</label>
+              <p class="admin-hint" id="live-ativa-ajuda">Ligado: o destaque aparece no banner após salvar. Desligado: fica oculto.</p>
+            </div>
+            <div class="admin-actions">
+              <button class="admin-button" type="submit" id="botao-salvar">Salvar alterações</button>
+              <p class="admin-dirty" id="aviso-alteracoes" hidden>Há alterações não salvas.</p>
+            </div>
+          </form>
+
+          <div class="admin-preview">
+            <h2 class="admin-preview__title">Prévia no banner</h2>
+            <p class="admin-hint" id="previa-aviso"></p>
+            <div class="admin-preview__stage">
+              <aside class="hero-live" aria-label="Prévia da transmissão ao vivo">
+                <p class="hero-live__badge"><span class="hero-live__dot" aria-hidden="true"></span>Ao vivo</p>
+                <div class="hero-live__body">
+                  <p class="hero-live__title" id="previa-titulo"></p>
+                  <p class="hero-live__text" id="previa-descricao"></p>
+                </div>
+                <a class="hero-live__link" id="previa-link" target="_blank" rel="noopener noreferrer"><span id="previa-botao"></span> <span aria-hidden="true">↗</span><span class="visually-hidden"> (abre em nova aba)</span></a>
+              </aside>
+            </div>
+            <a class="admin-link" href="../" target="_blank" rel="noopener">Ver o site <span aria-hidden="true">↗</span><span class="visually-hidden"> (abre em nova aba)</span></a>
+          </div>
+        </div>
+      </section>
+
+      <p class="admin-status admin-status--global" id="admin-status" role="status" aria-live="polite"></p>
+    </main>
+  </body>
+</html>

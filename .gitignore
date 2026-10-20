@@ -4,3 +4,16 @@ dist/
 .final-review/
 .verification/
 .a1-backup/
+node_modules/
+
+# Fotos originais (até 14 MB cada). O site usa as versões em assets/images/web/,
+# geradas por scripts/optimize-images.mjs. Os originais ficam só na máquina local.
+assets/images/cuidado.jpeg
+assets/images/escolha.jpeg
+assets/images/weiribanner.png
+assets/images/galeria/*.PNG
+assets/images/galeria/*.jpeg
+assets/images/galeria/*.JPEG
+assets/images/portfolio/*.jpeg
+assets/images/portfolio/*.JPEG
+assets/logo/*.PNG

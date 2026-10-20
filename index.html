@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Em produção, enviar a CSP também como cabeçalho HTTP, com frame-ancestors. -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-fjDr2vrMod+LFFX9HlAzdVS/WDwVw+07oJZv8yOPRwo='; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-fjDr2vrMod+LFFX9HlAzdVS/WDwVw+07oJZv8yOPRwo='; style-src 'self'; img-src 'self'; font-src 'self'; connect-src https://*.supabase.co; object-src 'none'; base-uri 'none'; form-action 'none'">
     <title>Weiri Borges | Assessoria, Cerimonial e Curadoria para Noivas</title>
     <meta name="description" content="Assessoria, cerimonial e curadoria para casamentos em São Luís de Montes Belos, Goiânia e região. Conheça a Weiri Borges e agende uma conversa.">
     <!-- Pré-publicação: liberar indexação somente após revisar as pendências. -->
@@ -36,16 +36,19 @@
     <link rel="preload" href="assets/fonts/cormorant-regular.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="preload" href="assets/fonts/manrope-regular.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/config.js" defer></script>
     <script src="js/script.js" defer></script>
+    <script src="js/live.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
     <header class="site-header">
       <div class="container header-layout">
-        <!-- Assinatura tipográfica provisória: substituir pelo logo oficial aprovado. -->
-        <a class="brand" href="#inicio" aria-label="Weiri Borges — início">
-          <span class="brand__name">Weiri Borges</span>
-          <span class="brand__descriptor">Assessoria &amp; Cerimonial</span>
+        <a class="brand" href="#inicio" aria-label="Weiri Borges Assessoria &amp; Cerimonial — início">
+          <picture>
+            <source srcset="assets/images/web/logo1.webp" type="image/webp">
+            <img class="brand__logo" src="assets/images/web/logo1.png" width="393" height="180" alt="" decoding="async">
+          </picture>
         </a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navegacao-principal" hidden>
           <span>Menu</span>
@@ -61,7 +64,7 @@
             <li><a href="#faq">FAQ</a></li>
             <li><a href="#contato">Contato</a></li>
           </ul>
-          <a class="header-cta" href="#contato">Vamos conversar <span aria-hidden="true">↗</span></a>
+          <a class="header-cta" href="https://wa.me/5564992104641?text=Ol%C3%A1%2C%20Weiri!%20Vim%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20o%20meu%20evento." data-whatsapp="Olá, Weiri! Vim pelo site e gostaria de conversar sobre o meu evento." target="_blank" rel="noopener noreferrer">Vamos conversar <span aria-hidden="true">↗</span><span class="visually-hidden"> pelo WhatsApp (abre em nova aba)</span></a>
         </nav>
       </div>
     </header>
@@ -69,6 +72,16 @@
       <section id="inicio" class="hero" aria-labelledby="inicio-titulo">
         <div class="container hero__layout">
           <div class="hero__content">
+            <!-- Transmissão ao vivo: preenchida por js/live.js a partir do Supabase.
+                 Permanece oculta sem transmissão ativa, sem JavaScript ou em caso de falha. -->
+            <aside class="hero-live" aria-label="Transmissão ao vivo" hidden>
+              <p class="hero-live__badge"><span class="hero-live__dot" aria-hidden="true"></span>Ao vivo</p>
+              <div class="hero-live__body">
+                <p class="hero-live__title"></p>
+                <p class="hero-live__text"></p>
+              </div>
+              <a class="hero-live__link" href="#inicio" target="_blank" rel="noopener noreferrer"><span class="hero-live__label"></span> <span aria-hidden="true">↗</span><span class="visually-hidden"> (abre em nova aba)</span></a>
+            </aside>
             <h1 id="inicio-titulo">
               <span class="hero__line">Seu casamento</span>
               <span class="hero__line">merece ser</span>
@@ -77,21 +90,22 @@
             </h1>
             <p class="hero__description">Enquanto cuidamos dos detalhes, vocês vivem a história que escolheram construir juntos.</p>
             <div class="hero__actions">
-              <a class="button hero__primary" href="#contato">
+              <a class="button hero__primary" href="https://wa.me/5564992104641?text=Ol%C3%A1%2C%20Weiri!%20Gostaria%20de%20agendar%20uma%20conversa%20sobre%20o%20meu%20evento." data-whatsapp="Olá, Weiri! Gostaria de agendar uma conversa sobre o meu evento." target="_blank" rel="noopener noreferrer">
                 <span class="button__label">Agendar uma conversa</span>
                 <img class="icon" src="assets/icons/arrow-up-right.svg" width="20" height="20" alt="" aria-hidden="true">
+                <span class="visually-hidden"> pelo WhatsApp (abre em nova aba)</span>
               </a>
               <a class="hero__secondary" href="#portfolio">Conhecer nosso trabalho <span aria-hidden="true">↗</span></a>
             </div>
           </div>
           <div class="hero__media">
             <picture class="hero__logo">
-              <source srcset="assets/images/logofake.webp" type="image/webp">
-              <img src="assets/images/logofake.png" width="2160" height="1904" alt="" aria-hidden="true" decoding="async">
+              <source srcset="assets/images/web/logobanner.webp" type="image/webp">
+              <img src="assets/images/web/logobanner.png" width="374" height="227" alt="" aria-hidden="true" decoding="async">
             </picture>
             <picture class="hero__photo">
-              <source type="image/webp" srcset="assets/images/weiri-700.webp 700w, assets/images/weiri-1200.webp 1200w" sizes="(min-width: 64rem) 40vw, 80vw">
-              <img class="hero__image" src="assets/images/weiri.png" width="1800" height="2700" alt="Retrato de Weiri Borges, sorrindo, de braços cruzados, com camisa azul." fetchpriority="high" decoding="async">
+              <source srcset="assets/images/web/weiribanner.webp" type="image/webp">
+              <img class="hero__image" src="assets/images/web/weiribanner.png" width="336" height="403" alt="Retrato de Weiri Borges, sorrindo, com vestido preto e um tablet nas mãos." fetchpriority="high" decoding="async">
             </picture>
           </div>
         </div>
@@ -118,67 +132,61 @@
               </div>
             </dl>
           </div>
-          <!-- Galeria: 12 fotografias em 4 fileiras de 3. Trocar as imagens ilustrativas e os espaços reservados pelas fotos aprovadas. -->
+          <!-- Galeria: 9 fotografias em 3 fileiras de 3 (assets/images/web/galeria-01 a 09). -->
           <div class="gallery">
               <figure class="gallery__item gallery__item--1">
                 <picture>
-                  <source srcset="assets/images/hero-placeholder.webp" type="image/webp">
-                  <img class="gallery__img gallery__img--a" src="assets/images/hero-placeholder.jpg" width="1200" height="801" alt="Imagem ilustrativa de uma mesa de recepção com flores brancas, taças verdes e cadeiras escuras." loading="lazy" decoding="async">
+                  <source type="image/webp" srcset="assets/images/web/galeria-01-400.webp 400w, assets/images/web/galeria-01-800.webp 800w" sizes="(min-width: 1025px) 14vw, (min-width: 48rem) 31vw, 24vw">
+                  <img class="gallery__img" src="assets/images/web/galeria-01-800.jpg" srcset="assets/images/web/galeria-01-400.jpg 400w, assets/images/web/galeria-01-800.jpg 800w" sizes="(min-width: 1025px) 14vw, (min-width: 48rem) 31vw, 24vw" width="800" height="1200" alt="Weiri Borges sentada, consultando um tablet." loading="lazy" decoding="async">
                 </picture>
               </figure>
               <figure class="gallery__item gallery__item--2">
-                <!-- Substituir por a fotografia definitiva 02: manter a proporção e criar a versão WebP. -->
-                <img class="gallery__img" src="assets/images/galeria/02.svg" width="800" height="800" alt="Espaço reservado para a fotografia 02 da galeria." loading="lazy" decoding="async">
+                <picture>
+                  <source type="image/webp" srcset="assets/images/web/galeria-02-400.webp 400w, assets/images/web/galeria-02-800.webp 800w" sizes="(min-width: 1025px) 14vw, (min-width: 48rem) 31vw, 24vw">
+                  <img class="gallery__img" src="assets/images/web/galeria-02-800.jpg" srcset="assets/images/web/galeria-02-400.jpg 400w, assets/images/web/galeria-02-800.jpg 800w" sizes="(min-width: 1025px) 14vw, (min-width: 48rem) 31vw, 24vw" width="800" height="1201" alt="Fotografia em preto e branco de Weiri Borges ajudando a noiva com o vestido." loading="lazy" decoding="async">
+                </picture>
               </figure>
               <figure class="gallery__item gallery__item--3">
                 <picture>
-                  <source srcset="assets/images/sobre-placeholder.webp" type="image/webp">
-                  <img class="gallery__img gallery__img--a" src="assets/images/sobre-placeholder.jpg" width="1000" height="1500" alt="Imagem ilustrativa de mesas posta ao ar livre, com flores brancas e taças verdes entre as árvores." loading="lazy" decoding="async">
+                  <source type="image/webp" srcset="assets/images/web/galeria-03-400.webp 400w, assets/images/web/galeria-03-800.webp 800w" sizes="(min-width: 1025px) 14vw, (min-width: 48rem) 31vw, 24vw">
+                  <img class="gallery__img" src="assets/images/web/galeria-03-800.jpg" srcset="assets/images/web/galeria-03-400.jpg 400w, assets/images/web/galeria-03-800.jpg 800w" sizes="(min-width: 1025px) 14vw, (min-width: 48rem) 31vw, 24vw" width="800" height="1201" alt="Detalhe de mesa com xícara, caderno de planejamento, celular e tablet." loading="lazy" decoding="async">
                 </picture>
               </figure>
               <figure class="gallery__item gallery__item--4">
-                <!-- Substituir por a fotografia definitiva 04: manter a proporção e criar a versão WebP. -->
-                <img class="gallery__img" src="assets/images/galeria/04.svg" width="800" height="800" alt="Espaço reservado para a fotografia 04 da galeria." loading="lazy" decoding="async">
+                <picture>
+                  <source type="image/webp" srcset="assets/images/web/galeria-04-400.webp 400w, assets/images/web/galeria-04-800.webp 800w" sizes="(min-width: 1025px) 14vw, (min-width: 48rem) 31vw, 24vw">
+                  <img class="gallery__img" src="assets/images/web/galeria-04-800.jpg" srcset="assets/images/web/galeria-04-400.jpg 400w, assets/images/web/galeria-04-800.jpg 800w" sizes="(min-width: 1025px) 14vw, (min-width: 48rem) 31vw, 24vw" width="800" height="1200" alt="Weiri Borges e a noiva sorrindo uma para a outra sob arranjo de flores brancas." loading="lazy" decoding="async">
+                </picture>
               </figure>
               <figure class="gallery__item gallery__item--5">
                 <picture>
-                  <source srcset="assets/images/hero-placeholder.webp" type="image/webp">
-                  <img class="gallery__img gallery__img--b" src="assets/images/hero-placeholder.jpg" width="1200" height="801" alt="Imagem ilustrativa: detalhe de taças verdes e flores brancas sobre a mesa." loading="lazy" decoding="async">
+                  <source type="image/webp" srcset="assets/images/web/galeria-05-400.webp 400w, assets/images/web/galeria-05-800.webp 800w" sizes="(min-width: 1025px) 14vw, (min-width: 48rem) 31vw, 24vw">
+                  <img class="gallery__img" src="assets/images/web/galeria-05-800.jpg" srcset="assets/images/web/galeria-05-400.jpg 400w, assets/images/web/galeria-05-800.jpg 800w" sizes="(min-width: 1025px) 14vw, (min-width: 48rem) 31vw, 24vw" width="800" height="1200" alt="Weiri Borges sentada, concentrada no tablet." loading="lazy" decoding="async">
                 </picture>
               </figure>
               <figure class="gallery__item gallery__item--6">
-                <!-- Substituir por a fotografia definitiva 06: manter a proporção e criar a versão WebP. -->
-                <img class="gallery__img" src="assets/images/galeria/06.svg" width="800" height="800" alt="Espaço reservado para a fotografia 06 da galeria." loading="lazy" decoding="async">
+                <picture>
+                  <source type="image/webp" srcset="assets/images/web/galeria-06-400.webp 400w, assets/images/web/galeria-06-800.webp 800w" sizes="(min-width: 1025px) 14vw, (min-width: 48rem) 31vw, 24vw">
+                  <img class="gallery__img" src="assets/images/web/galeria-06-800.jpg" srcset="assets/images/web/galeria-06-400.jpg 400w, assets/images/web/galeria-06-800.jpg 800w" sizes="(min-width: 1025px) 14vw, (min-width: 48rem) 31vw, 24vw" width="800" height="1200" alt="A noiva e Weiri Borges de mãos dadas diante do bolo e de flores coloridas." loading="lazy" decoding="async">
+                </picture>
               </figure>
               <figure class="gallery__item gallery__item--7">
                 <picture>
-                  <source srcset="assets/images/sobre-placeholder.webp" type="image/webp">
-                  <img class="gallery__img gallery__img--b" src="assets/images/sobre-placeholder.jpg" width="1000" height="1500" alt="Imagem ilustrativa: mesa posta com pratos de palha, taças verdes e um marcador de mesa dourado." loading="lazy" decoding="async">
+                  <source type="image/webp" srcset="assets/images/web/galeria-07-400.webp 400w, assets/images/web/galeria-07-800.webp 800w" sizes="(min-width: 1025px) 14vw, (min-width: 48rem) 31vw, 24vw">
+                  <img class="gallery__img" src="assets/images/web/galeria-07-800.jpg" srcset="assets/images/web/galeria-07-400.jpg 400w, assets/images/web/galeria-07-800.jpg 800w" sizes="(min-width: 1025px) 14vw, (min-width: 48rem) 31vw, 24vw" width="800" height="1200" alt="Retrato de corpo inteiro de Weiri Borges em vestido preto." loading="lazy" decoding="async">
                 </picture>
               </figure>
               <figure class="gallery__item gallery__item--8">
-                <!-- Substituir por a fotografia definitiva 08: manter a proporção e criar a versão WebP. -->
-                <img class="gallery__img" src="assets/images/galeria/08.svg" width="800" height="800" alt="Espaço reservado para a fotografia 08 da galeria." loading="lazy" decoding="async">
+                <picture>
+                  <source type="image/webp" srcset="assets/images/web/galeria-08-400.webp 400w, assets/images/web/galeria-08-800.webp 800w" sizes="(min-width: 1025px) 14vw, (min-width: 48rem) 31vw, 24vw">
+                  <img class="gallery__img" src="assets/images/web/galeria-08-800.jpg" srcset="assets/images/web/galeria-08-400.jpg 400w, assets/images/web/galeria-08-800.jpg 800w" sizes="(min-width: 1025px) 14vw, (min-width: 48rem) 31vw, 24vw" width="800" height="1200" alt="Fotografia em preto e branco da noiva com o noivo e Weiri Borges ao fundo." loading="lazy" decoding="async">
+                </picture>
               </figure>
               <figure class="gallery__item gallery__item--9">
                 <picture>
-                  <source srcset="assets/images/hero-placeholder.webp" type="image/webp">
-                  <img class="gallery__img gallery__img--c" src="assets/images/hero-placeholder.jpg" width="1200" height="801" alt="Imagem ilustrativa: cadeiras escuras e mesa redonda em recepção ao ar livre." loading="lazy" decoding="async">
+                  <source type="image/webp" srcset="assets/images/web/galeria-09-400.webp 400w, assets/images/web/galeria-09-800.webp 800w" sizes="(min-width: 1025px) 14vw, (min-width: 48rem) 31vw, 24vw">
+                  <img class="gallery__img" src="assets/images/web/galeria-09-800.jpg" srcset="assets/images/web/galeria-09-400.jpg 400w, assets/images/web/galeria-09-800.jpg 800w" sizes="(min-width: 1025px) 14vw, (min-width: 48rem) 31vw, 24vw" width="800" height="1201" alt="Retrato de Weiri Borges sentada, sorrindo." loading="lazy" decoding="async">
                 </picture>
-              </figure>
-              <figure class="gallery__item gallery__item--10">
-                <!-- Substituir por a fotografia definitiva 10: manter a proporção e criar a versão WebP. -->
-                <img class="gallery__img" src="assets/images/galeria/10.svg" width="800" height="800" alt="Espaço reservado para a fotografia 10 da galeria." loading="lazy" decoding="async">
-              </figure>
-              <figure class="gallery__item gallery__item--11">
-                <picture>
-                  <source srcset="assets/images/sobre-placeholder.webp" type="image/webp">
-                  <img class="gallery__img gallery__img--c" src="assets/images/sobre-placeholder.jpg" width="1000" height="1500" alt="Imagem ilustrativa: recepção ao ar livre com luz natural e luzes penduradas." loading="lazy" decoding="async">
-                </picture>
-              </figure>
-              <figure class="gallery__item gallery__item--12">
-                <!-- Substituir por a fotografia definitiva 12: manter a proporção e criar a versão WebP. -->
-                <img class="gallery__img" src="assets/images/galeria/12.svg" width="800" height="800" alt="Espaço reservado para a fotografia 12 da galeria." loading="lazy" decoding="async">
               </figure>
           </div>
         </div>
@@ -191,8 +199,10 @@
       </section>
 
       <figure class="panorama panorama--table">
-        <picture><source srcset="assets/images/sobre-placeholder.webp" type="image/webp"><img src="assets/images/sobre-placeholder.jpg" width="1000" height="1500" loading="lazy" decoding="async" alt="Imagem ilustrativa: detalhe de taças verdes, flores brancas e pratos sobre uma mesa posta."></picture>
-        <figcaption class="panorama__caption"><span>Imagem ilustrativa</span> <a href="https://www.pexels.com/photo/wedding-table-decoration-19870036/" target="_blank" rel="noopener noreferrer">Jonathan Borba / Pexels<span class="visually-hidden"> (abre em nova aba)</span></a></figcaption>
+        <picture>
+          <source type="image/webp" srcset="assets/images/web/cuidado-800.webp 800w, assets/images/web/cuidado-1600.webp 1600w" sizes="100vw">
+          <img src="assets/images/web/cuidado-1600.jpg" srcset="assets/images/web/cuidado-800.jpg 800w, assets/images/web/cuidado-1600.jpg 1600w" sizes="100vw" width="1600" height="717" loading="lazy" decoding="async" alt="Weiri Borges entre uma convidada de vestido branco e o noivo, em cenário com flores brancas.">
+        </picture>
       </figure>
 
       <section id="curadoria" class="section curation" aria-labelledby="curadoria-titulo">
@@ -201,7 +211,10 @@
             <h2 id="curadoria-titulo">Antes de escolher, <em>é preciso entender.</em></h2>
             <p class="curation__description">A curadoria começa pela escuta: o que faz sentido para vocês, o que desejam expressar e como querem viver esse dia. A partir dessa essência, conceito, estilo e atmosfera dão direção às escolhas do casamento.</p>
             <figure class="curation__figure">
-              <picture><source srcset="assets/images/hero-placeholder.webp" type="image/webp"><img src="assets/images/hero-placeholder.jpg" width="1200" height="801" loading="lazy" decoding="async" alt="Imagem ilustrativa: close de flores brancas e taças verdes sobre uma mesa."></picture>
+              <picture>
+                <source type="image/webp" srcset="assets/images/web/escolha-700.webp 700w, assets/images/web/escolha-1400.webp 1400w" sizes="(min-width: 64rem) 46vw, 100vw">
+                <img src="assets/images/web/escolha-1400.jpg" srcset="assets/images/web/escolha-700.jpg 700w, assets/images/web/escolha-1400.jpg 1400w" sizes="(min-width: 64rem) 46vw, 100vw" width="1400" height="2100" loading="lazy" decoding="async" alt="Weiri Borges à mesa com caderno de planejamento, xícara, tablet e celular.">
+              </picture>
             </figure>
           </div>
           <ol class="curation__path" aria-label="O percurso da curadoria" role="list">
@@ -288,72 +301,43 @@
           <div class="portfolio__intro">
             <h2 id="portfolio-titulo">Histórias que merecem <em>ser lembradas.</em></h2>
           </div>
-          <!-- Ativar os sources somente após adicionar os arquivos reais.
-               Manter a mesma proporção em AVIF, WebP e no fallback. -->
+          <!-- Portfólio: 6 fotografias (assets/images/portfolio/10–16, sem a 14). -->
           <div class="portfolio__gallery">
             <figure class="portfolio__item portfolio__item--1">
               <picture class="portfolio__frame">
-                <!-- <source srcset="assets/images/portfolio/01.avif" type="image/avif"> -->
-                <!-- <source srcset="assets/images/portfolio/01.webp" type="image/webp"> -->
-                <img src="assets/images/portfolio/01.svg" alt="Espaço reservado para fotografia do encontro do casal. Placeholder, não é uma imagem de evento real." width="900" height="1125" loading="lazy" decoding="async">
+                <source type="image/webp" srcset="assets/images/web/portfolio-10-800.webp 800w, assets/images/web/portfolio-10-1600.webp 1365w" sizes="(min-width: 48rem) 60vw, 100vw">
+                <img src="assets/images/web/portfolio-10-1600.jpg" srcset="assets/images/web/portfolio-10-800.jpg 800w, assets/images/web/portfolio-10-1600.jpg 1365w" sizes="(min-width: 48rem) 60vw, 100vw" alt="Weiri Borges ajeita o vestido da noiva ao ar livre, antes da cerimônia." width="1365" height="2048" loading="lazy" decoding="async">
               </picture>
-              <figcaption><span>01 — O encontro</span><span>Imagem provisória</span></figcaption>
             </figure>
             <figure class="portfolio__item portfolio__item--2">
               <picture class="portfolio__frame">
-                <!-- <source srcset="assets/images/portfolio/02.avif" type="image/avif"> -->
-                <!-- <source srcset="assets/images/portfolio/02.webp" type="image/webp"> -->
-                <img src="assets/images/portfolio/02.svg" alt="Espaço reservado para fotografia dos detalhes do casamento. Placeholder, não é uma imagem de evento real." width="640" height="640" loading="lazy" decoding="async">
+                <source type="image/webp" srcset="assets/images/web/portfolio-11-800.webp 800w, assets/images/web/portfolio-11-1600.webp 1066w" sizes="(min-width: 48rem) 60vw, 100vw">
+                <img src="assets/images/web/portfolio-11-1600.jpg" srcset="assets/images/web/portfolio-11-800.jpg 800w, assets/images/web/portfolio-11-1600.jpg 1066w" sizes="(min-width: 48rem) 60vw, 100vw" alt="Fotografia em preto e branco de Weiri Borges ajudando a noiva com o vestido." width="1066" height="1600" loading="lazy" decoding="async">
               </picture>
-              <figcaption><span>02 — Os detalhes</span><span>Imagem provisória</span></figcaption>
             </figure>
             <figure class="portfolio__item portfolio__item--3">
               <picture class="portfolio__frame">
-                <!-- <source srcset="assets/images/portfolio/03.avif" type="image/avif"> -->
-                <!-- <source srcset="assets/images/portfolio/03.webp" type="image/webp"> -->
-                <img src="assets/images/portfolio/03.svg" alt="Espaço reservado para fotografia da atmosfera da celebração. Placeholder, não é uma imagem de evento real." width="1200" height="750" loading="lazy" decoding="async">
+                <source type="image/webp" srcset="assets/images/web/portfolio-12-800.webp 800w, assets/images/web/portfolio-12-1600.webp 1600w" sizes="(min-width: 48rem) 60vw, 100vw">
+                <img src="assets/images/web/portfolio-12-1600.jpg" srcset="assets/images/web/portfolio-12-800.jpg 800w, assets/images/web/portfolio-12-1600.jpg 1600w" sizes="(min-width: 48rem) 60vw, 100vw" alt="Weiri Borges e a noiva sorrindo uma para a outra sob arranjo de flores brancas." width="1600" height="2400" loading="lazy" decoding="async">
               </picture>
-              <figcaption><span>03 — A atmosfera</span><span>Imagem provisória</span></figcaption>
             </figure>
             <figure class="portfolio__item portfolio__item--4">
               <picture class="portfolio__frame">
-                <!-- <source srcset="assets/images/portfolio/04.avif" type="image/avif"> -->
-                <!-- <source srcset="assets/images/portfolio/04.webp" type="image/webp"> -->
-                <img src="assets/images/portfolio/04.svg" alt="Espaço reservado para fotografia dos preparativos. Placeholder, não é uma imagem de evento real." width="640" height="800" loading="lazy" decoding="async">
+                <source type="image/webp" srcset="assets/images/web/portfolio-13-800.webp 800w, assets/images/web/portfolio-13-1600.webp 1600w" sizes="(min-width: 48rem) 60vw, 100vw">
+                <img src="assets/images/web/portfolio-13-1600.jpg" srcset="assets/images/web/portfolio-13-800.jpg 800w, assets/images/web/portfolio-13-1600.jpg 1600w" sizes="(min-width: 48rem) 60vw, 100vw" alt="A noiva e Weiri Borges de mãos dadas diante do bolo e de flores coloridas." width="1600" height="2401" loading="lazy" decoding="async">
               </picture>
-              <figcaption><span>04 — Os preparativos</span><span>Imagem provisória</span></figcaption>
             </figure>
             <figure class="portfolio__item portfolio__item--5">
               <picture class="portfolio__frame">
-                <!-- <source srcset="assets/images/portfolio/05.avif" type="image/avif"> -->
-                <!-- <source srcset="assets/images/portfolio/05.webp" type="image/webp"> -->
-                <img src="assets/images/portfolio/05.svg" alt="Espaço reservado para fotografia da cerimônia. Placeholder, não é uma imagem de evento real." width="900" height="1200" loading="lazy" decoding="async">
+                <source type="image/webp" srcset="assets/images/web/portfolio-15-800.webp 800w, assets/images/web/portfolio-15-1600.webp 1600w" sizes="(min-width: 48rem) 60vw, 100vw">
+                <img src="assets/images/web/portfolio-15-1600.jpg" srcset="assets/images/web/portfolio-15-800.jpg 800w, assets/images/web/portfolio-15-1600.jpg 1600w" sizes="(min-width: 48rem) 60vw, 100vw" alt="Fotografia em preto e branco da noiva com o noivo e Weiri Borges ao fundo." width="1600" height="2400" loading="lazy" decoding="async">
               </picture>
-              <figcaption><span>05 — A cerimônia</span><span>Imagem provisória</span></figcaption>
             </figure>
             <figure class="portfolio__item portfolio__item--6">
               <picture class="portfolio__frame">
-                <!-- <source srcset="assets/images/portfolio/06.avif" type="image/avif"> -->
-                <!-- <source srcset="assets/images/portfolio/06.webp" type="image/webp"> -->
-                <img src="assets/images/portfolio/06.svg" alt="Espaço reservado para fotografia dos afetos entre os convidados. Placeholder, não é uma imagem de evento real." width="900" height="600" loading="lazy" decoding="async">
+                <source type="image/webp" srcset="assets/images/web/portfolio-16-800.webp 800w, assets/images/web/portfolio-16-1600.webp 1600w" sizes="(min-width: 48rem) 60vw, 100vw">
+                <img src="assets/images/web/portfolio-16-1600.jpg" srcset="assets/images/web/portfolio-16-800.jpg 800w, assets/images/web/portfolio-16-1600.jpg 1600w" sizes="(min-width: 48rem) 60vw, 100vw" alt="Equipe de Weiri Borges cuidando da noiva sentada no gramado, à noite, entre luzes e flores." width="1600" height="2400" loading="lazy" decoding="async">
               </picture>
-              <figcaption><span>06 — Os afetos</span><span>Imagem provisória</span></figcaption>
-            </figure>
-            <figure class="portfolio__item portfolio__item--7">
-              <picture class="portfolio__frame">
-                <!-- <source srcset="assets/images/portfolio/07.avif" type="image/avif"> -->
-                <!-- <source srcset="assets/images/portfolio/07.webp" type="image/webp"> -->
-                <img src="assets/images/portfolio/07.svg" alt="Espaço reservado para fotografia da celebração. Placeholder, não é uma imagem de evento real." width="640" height="800" loading="lazy" decoding="async">
-              </picture>
-              <figcaption><span>07 — A celebração</span><span>Imagem provisória</span></figcaption>
-            </figure>
-            <figure class="portfolio__item portfolio__item--8">
-              <picture class="portfolio__frame">
-                <!-- <source srcset="assets/images/portfolio/08.avif" type="image/avif"> -->
-                <!-- <source srcset="assets/images/portfolio/08.webp" type="image/webp"> -->
-                <img src="assets/images/portfolio/08.svg" alt="Espaço reservado para fotografia panorâmica de uma memória do casal. Placeholder, não é uma imagem de evento real." width="1200" height="750" loading="lazy" decoding="async">
-              </picture>
-              <figcaption><span>08 — A memória</span><span>Imagem provisória</span></figcaption>
             </figure>
           </div>
         </div>
@@ -392,10 +376,6 @@
 
       <section id="historia" class="section story" aria-labelledby="historia-titulo">
         <div class="container story__banner">
-          <picture class="story__logo">
-            <source srcset="assets/images/logofake2.webp" type="image/webp">
-            <img src="assets/images/logofake2.png" width="2160" height="1909" alt="Logotipo da Weiri Borges: flor de lótus estilizada." loading="lazy" decoding="async">
-          </picture>
           <h2 id="historia-titulo">Por trás de cada casamento, existe uma pessoa que <em>escolheu cuidar.</em></h2>
           <p class="story__text">A experiência de Weiri com eventos começou em 2002. São 7 anos de Weiri Borges Assessoria &amp; Cerimonial — uma trajetória dedicada a cuidar.</p>
           <dl class="story__milestones" aria-label="Marcos da trajetória">
@@ -465,7 +445,10 @@
               </div>
             </div>
             <!-- Trocar por uma versão reduzida do logo oficial quando estiver disponível. -->
-            <p class="signature faq__signature"><span>Weiri Borges</span><span>Assessoria &amp; Cerimonial</span></p>
+            <picture class="faq__signature">
+              <source srcset="assets/images/web/logo1.webp" type="image/webp">
+              <img src="assets/images/web/logo1.png" width="393" height="180" alt="Weiri Borges Assessoria &amp; Cerimonial" loading="lazy" decoding="async">
+            </picture>
           </div>
         </div>
       </section>
@@ -475,13 +458,13 @@
           <div class="container contact__inner">
             <h2 id="contato-titulo">Seu grande dia começa muito antes <em>do altar.</em></h2>
             <p class="contact__text">Começa quando vocês encontram alguém que entende o que esse momento significa e escolhe cuidar de cada detalhe junto com vocês.</p>
-            <a class="button contact__cta" href="https://wa.me/5564992104641?text=Ol%C3%A1%2C%20Weiri!%20Gostaria%20de%20agendar%20uma%20conversa%20sobre%20meu%20evento." target="_blank" rel="noopener noreferrer">QUERO AGENDAR UMA CONVERSA<span class="visually-hidden"> pelo WhatsApp (abre em nova aba)</span></a>
+            <a class="button contact__cta" href="https://wa.me/5564992104641?text=Ol%C3%A1%2C%20Weiri!%20Gostaria%20de%20agendar%20uma%20conversa%20sobre%20meu%20evento." data-whatsapp="Olá, Weiri! Gostaria de agendar uma conversa sobre meu evento." target="_blank" rel="noopener noreferrer">QUERO AGENDAR UMA CONVERSA<span class="visually-hidden"> pelo WhatsApp (abre em nova aba)</span></a>
           </div>
         </div>
         <div class="container contact__layout">
           <form id="formulario-contato" class="contact-form" method="post" aria-labelledby="formulario-titulo" aria-describedby="formulario-aviso">
               <h3 id="formulario-titulo">Conte um pouco sobre o seu evento.</h3>
-              <p id="formulario-aviso" class="contact-form__notice">Este formulário ainda não envia mensagens. Você pode validar os dados abaixo; para entrar em contato, use o WhatsApp.</p>
+              <p id="formulario-aviso" class="contact-form__notice">Ao enviar, o WhatsApp abrirá com a sua mensagem pronta. Basta confirmar o envio por lá.</p>
               <p class="contact-form__required">Campos com * são obrigatórios.</p>
               <!-- Habilitado somente após registrar o bloqueio do envio nativo. -->
               <fieldset id="contato-campos" disabled>
@@ -494,10 +477,10 @@
                   <div class="contact-field contact-field--full"><label for="mensagem">Mensagem <span aria-hidden="true">*</span></label><textarea id="mensagem" name="mensagem" rows="5" autocomplete="off" maxlength="2000" required aria-describedby="mensagem-ajuda mensagem-erro"></textarea><p id="mensagem-ajuda" class="contact-field__hint">Até 2.000 caracteres.</p><p id="mensagem-erro" class="contact-field__error"></p></div>
                 </div>
                 <div class="contact-form__honeypot" aria-hidden="true"><label for="website">Deixe este campo vazio</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off" maxlength="100"></div>
-                <button class="button contact-form__submit" type="submit"><span class="button__label">VALIDAR MENSAGEM</span></button>
+                <button class="button contact-form__submit" type="submit"><span class="button__label">ENVIAR PELO WHATSAPP</span><span class="visually-hidden"> (abre em nova aba)</span></button>
               </fieldset>
               <p id="formulario-status" class="contact-form__status" role="status" aria-live="polite" aria-atomic="true"></p>
-              <noscript><p>Ative o JavaScript para validar este formulário ou entre em contato pelo WhatsApp acima.</p></noscript>
+              <noscript><p>Ative o JavaScript para enviar este formulário ou entre em contato pelo WhatsApp acima.</p></noscript>
             </form>
         </div>
       </section>
@@ -506,10 +489,11 @@
       <div class="container footer-layout">
         <div class="footer-mark">
           <picture class="footer-logo">
-            <source srcset="assets/images/logofake2.webp" type="image/webp">
-            <img src="assets/images/logofake2.png" width="2160" height="1909" alt="Logotipo da Weiri Borges: flor de lótus estilizada." loading="lazy" decoding="async">
+            <source srcset="assets/images/web/logo2.webp" type="image/webp">
+            <img src="assets/images/web/logo2.png" width="438" height="200" alt="" loading="lazy" decoding="async">
           </picture>
-          <div>
+          <!-- O logo2 já traz nome e descritor; o texto fica só para leitores de tela. -->
+          <div class="visually-hidden">
             <p class="footer-brand">Weiri Borges</p>
             <p class="footer-descriptor">Assessoria &amp; Cerimonial</p>
           </div>
@@ -549,12 +533,12 @@
           </div>
           <nav class="footer-block footer-contact" aria-label="Canais de contato">
             <p class="footer-label">Contato</p>
-            <a href="https://wa.me/5564992104641?text=Ol%C3%A1%2C%20Weiri!%20Gostaria%20de%20agendar%20uma%20conversa%20sobre%20meu%20evento." target="_blank" rel="noopener noreferrer">WhatsApp · (64) 99210-4641<span class="visually-hidden"> (abre em nova aba)</span></a>
+            <a href="https://wa.me/5564992104641?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os%20de%20cerimonial." data-whatsapp="Olá, gostaria de saber mais sobre os serviços de cerimonial." target="_blank" rel="noopener noreferrer">WhatsApp · (64) 99210-4641<span class="visually-hidden"> (abre em nova aba)</span></a>
             <a href="mailto:weiborgescerimonial@gmail.com">weiborgescerimonial@gmail.com</a>
             <a href="https://www.instagram.com/weiriborgescerimonial/" target="_blank" rel="noopener noreferrer">Instagram · @weiriborgescerimonial<span class="visually-hidden"> (abre em nova aba)</span></a>
           </nav>
         </div>
-        <p class="footer-legal">© 2026 Weiri Borges Assessoria &amp; Cerimonial</p>
+        <p class="footer-legal">© 2026 Weiri Borges Assessoria &amp; Cerimonial <span class="footer-legal__sep" aria-hidden="true">|</span> <span class="footer-legal__credit">Site Criado Por <a href="https://topsitebr.com.br" target="_blank" rel="noopener noreferrer"><strong>Top Site</strong><span class="visually-hidden"> (abre em nova aba)</span></a></span></p>
       </div>
     </footer>
   </body>
