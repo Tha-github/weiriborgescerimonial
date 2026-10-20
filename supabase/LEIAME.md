@@ -31,7 +31,7 @@ Administradora ──► /admin/ ──► login (Supabase Auth) ──► salva
    *Confirm email*):
    - **Ligada** (padrão, recomendado): após o cadastro, a cliente recebe um e-mail e
      toca no link para entrar. Configurar em **Authentication → URL Configuration**
-     o *Site URL* como `https://tha-github.github.io/weiriborgescerimonial/admin/`.
+     o *Site URL* como `https://weiriborgescerimonial.topsitebr.com.br/admin/`.
    - **Desligada**: o cadastro entra direto no painel.
 5. **Fazer o primeiro acesso logo após configurar** (ver seção 3): a primeira conta
    criada é a administradora. Conferir no SQL Editor:
@@ -73,20 +73,20 @@ consegue entrar. Basta reativar o projeto no painel do Supabase.
 O GitHub Pages publica a branch `main`, pasta raiz. Depois de preencher
 `js/config.js`, fazer commit e push dos arquivos do site. Não há etapa de build.
 
-- Site: <https://tha-github.github.io/weiriborgescerimonial/>
-- Painel: <https://tha-github.github.io/weiriborgescerimonial/admin/>
+- Site: <https://weiriborgescerimonial.topsitebr.com.br/>
+- Painel: <https://weiriborgescerimonial.topsitebr.com.br/admin/>
 
 O painel não aparece em menus e tem `noindex`, mas **não depende de ser secreto**:
 sem uma conta autorizada não é possível alterar nada.
 
 ## 3. Como publicar uma live (para a cliente)
 
-**Primeiro acesso (uma única vez):** abrir **…/weiriborgescerimonial/admin/**. Aparece
+**Primeiro acesso (uma única vez):** abrir **weiriborgescerimonial.topsitebr.com.br/admin/**. Aparece
 **Criar cadastro**: informar e-mail, senha (mínimo de 8 caracteres) e confirmar a
 senha. Se a confirmação de e-mail estiver ligada, abrir o e-mail recebido e tocar no
 link. Daí em diante o painel sempre pede apenas o login.
 
-1. Abrir **…/weiriborgescerimonial/admin/** no celular ou computador e entrar com
+1. Abrir **weiriborgescerimonial.topsitebr.com.br/admin/** no celular ou computador e entrar com
    e-mail e senha.
 2. Preencher:
    - **Título** — ex.: *Cerimônia de casamento*
