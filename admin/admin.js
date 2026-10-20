@@ -133,7 +133,7 @@
     const status = error && error.status;
     if (status === 0) return 'Sem conexão. Verifique a internet e tente novamente.';
     if (status === 401) return 'A chave de acesso do GitHub expirou ou foi revogada. É preciso reconfigurar o acesso (peça a quem mantém o site).';
-    if (error.rateLimited) return 'O GitHub limitou as solicitações por alguns minutos. Tente novamente em instantes.';
+    if (error.rateLimited) return 'O GitHub limitou as solicitações por alguns minutos. Tente novamente em instantes. (GitHub ' + status + ': ' + (error.message || 'sem detalhes') + ')';
     if (status === 403) {
       return 'O GitHub recusou a gravação: essa chave não tem permissão para alterar ' + repo.owner + '/' + repo.repo
         + '. Confira no token: "Repository access" com o repositório ' + repo.repo + ' selecionado e "Contents: Read and write".'
