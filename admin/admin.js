@@ -80,7 +80,7 @@
   // --- GitHub ----------------------------------------------------------------
 
   class GitHubError extends Error {
-    constructor(status, message) { super(message); this.status = status; }
+    constructor(status, message, rateLimited = false) { super(message); this.status = status; this.rateLimited = rateLimited; }
   }
 
   async function github(path, options = {}, useToken = token) {
@@ -100,7 +100,11 @@
       throw new GitHubError(0, 'network');
     }
     if (response.status === 404 && options.allow404) return null;
-    if (!response.ok) throw new GitHubError(response.status, (await response.json().catch(() => ({}))).message || '');
+    if (!response.ok) {
+      const message = (await response.json().catch(() => ({}))).message || '';
+      const rateLimited = response.status === 429 || response.headers.get('x-ratelimit-remaining') === '0' || /rate limit/i.test(message);
+      throw new GitHubError(response.status, message, rateLimited);
+    }
     return response.status === 204 ? null : response.json();
   }
 
@@ -129,8 +133,12 @@
     const status = error && error.status;
     if (status === 0) return 'Sem conexão. Verifique a internet e tente novamente.';
     if (status === 401) return 'A chave de acesso do GitHub expirou ou foi revogada. É preciso reconfigurar o acesso (peça a quem mantém o site).';
-    if (status === 403 && error.message === 'no-push') return 'Essa chave não tem permissão de gravação neste repositório (Contents: Read and write).';
-    if (status === 403 || status === 429) return 'O GitHub limitou as solicitações por alguns minutos. Tente novamente em instantes.';
+    if (error.rateLimited) return 'O GitHub limitou as solicitações por alguns minutos. Tente novamente em instantes.';
+    if (status === 403) {
+      return 'O GitHub recusou a gravação: essa chave não tem permissão para alterar ' + repo.owner + '/' + repo.repo
+        + '. Confira no token: "Repository access" com o repositório ' + repo.repo + ' selecionado e "Contents: Read and write".'
+        + (error.message && error.message !== 'no-push' ? ' (GitHub: ' + error.message + ')' : '');
+    }
     if (status === 404) return 'Repositório não encontrado com essa chave. Confira se o token dá acesso a ' + repo.owner + '/' + repo.repo + '.';
     if (status === 409 || status === 422) return 'O arquivo mudou enquanto você editava. Recarregamos os dados; confira e salve de novo.';
     return 'Não foi possível concluir. Tente novamente em instantes.';
