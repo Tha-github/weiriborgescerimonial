@@ -1,11 +1,10 @@
-// Destaque "Ao vivo" no banner. Lê do Supabase somente a transmissão ativa
-// (a política RLS impede ler as inativas). Qualquer falha mantém o bloco oculto.
+// Destaque "Ao vivo" no banner. Lê data/live.json (gravado pelo painel /admin/).
+// Sem transmissão ativa, com dados inválidos ou em caso de falha, o bloco fica oculto.
 (() => {
   'use strict';
 
-  const config = window.WEIRI_CONFIG || {};
   const block = document.querySelector('.hero-live');
-  if (!block || !config.supabaseUrl || !config.supabaseKey) return;
+  if (!block) return;
 
   const LIMITS = { title: 80, description: 200, button_text: 40 };
   const TIMEOUT_MS = 8000;
@@ -24,39 +23,8 @@
     return String(value || '').replace(/\s+/g, ' ').trim().slice(0, max);
   }
 
-  async function load() {
-    const endpoint = new URL('rest/v1/live_transmissions', config.supabaseUrl.replace(/\/?$/, '/'));
-    endpoint.searchParams.set('select', 'title,description,url,button_text');
-    endpoint.searchParams.set('is_active', 'eq.true');
-    endpoint.searchParams.set('limit', '1');
-    if (endpoint.protocol !== 'https:') return;
-
-    const headers = { apikey: config.supabaseKey, Accept: 'application/json' };
-    // Chaves anon legadas são JWT e também são aceitas como Bearer.
-    if (config.supabaseKey.startsWith('eyJ')) headers.Authorization = 'Bearer ' + config.supabaseKey;
-
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
-    try {
-      const response = await fetch(endpoint, {
-        headers,
-        signal: controller.signal,
-        cache: 'no-store',
-        credentials: 'omit',
-        referrerPolicy: 'no-referrer',
-      });
-      if (!response.ok) return;
-      const rows = await response.json();
-      render(Array.isArray(rows) ? rows[0] : null);
-    } catch {
-      // Supabase indisponível ou bloqueado: o banner segue sem o destaque.
-    } finally {
-      clearTimeout(timer);
-    }
-  }
-
   function render(live) {
-    if (!live) return;
+    if (!live || live.is_active !== true) return;
     const url = safeHttpsUrl(live.url);
     const title = clean(live.title, LIMITS.title);
     if (!url || !title) return;
@@ -68,6 +36,21 @@
     block.querySelector('.hero-live__label').textContent = clean(live.button_text, LIMITS.button_text) || 'Assistir à transmissão';
     block.querySelector('.hero-live__link').href = url;
     block.hidden = false;
+  }
+
+  async function load() {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
+    try {
+      // Parâmetro único evita versões antigas guardadas em cache.
+      const response = await fetch('data/live.json?v=' + Date.now(), { cache: 'no-store', signal: controller.signal });
+      if (!response.ok) return;
+      render(await response.json());
+    } catch {
+      // Arquivo indisponível ou inválido: o banner segue sem o destaque.
+    } finally {
+      clearTimeout(timer);
+    }
   }
 
   load().catch(() => {});

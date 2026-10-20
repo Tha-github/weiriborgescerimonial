@@ -177,3 +177,10 @@ code { font-size: 0.875em; overflow-wrap: anywhere; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* Trocar senha e links discretos */
+.admin-details { margin-block-start: 1rem; padding-block: 1rem; }
+.admin-details summary { cursor: pointer; color: var(--color-action); font-size: 0.875rem; font-weight: 600; min-height: 2.75rem; display: flex; align-items: center; }
+.admin-details[open] summary { margin-block-end: 1rem; }
+.admin-subtle { padding-inline: 0; font-weight: 500; color: var(--color-muted); }
+.admin-card code { font-size: 0.8125rem; }

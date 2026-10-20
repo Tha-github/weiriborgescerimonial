@@ -4,8 +4,8 @@
 `assets/images/web/` (geradas por `scripts/optimize-images.mjs`, conferidas por
 `scripts/check-images.mjs`); WhatsApp centralizado em `js/config.js`; formulário
 abre o WhatsApp com a mensagem pronta; destaque "Ao vivo" no banner (`js/live.js`)
-com painel em `/admin/` e Supabase — configuração e uso em
-[supabase/LEIAME.md](supabase/LEIAME.md). As notas abaixo são históricas.
+com painel em `/admin/` que grava o link em `data/live.json`, sem banco de dados —
+configuração e uso em [PAINEL.md](PAINEL.md). As notas abaixo são históricas.
 
 **Estado anterior (etapa 10):** entrega e checklist em [FINALIZACAO.md](FINALIZACAO.md).
 Auditoria em [AUDITORIA.md](AUDITORIA.md), evidências atualizadas

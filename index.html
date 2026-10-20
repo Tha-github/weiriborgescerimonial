@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Em produção, enviar a CSP também como cabeçalho HTTP, com frame-ancestors. -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-fjDr2vrMod+LFFX9HlAzdVS/WDwVw+07oJZv8yOPRwo='; style-src 'self'; img-src 'self'; font-src 'self'; connect-src https://*.supabase.co; object-src 'none'; base-uri 'none'; form-action 'none'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-cOqtOdXqdhZ6G0g49AE2TH+C96vnoDNRvv56QDHcCWU='; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
     <title>Weiri Borges | Assessoria, Cerimonial e Curadoria para Noivas</title>
     <meta name="description" content="Assessoria, cerimonial e curadoria para casamentos em São Luís de Montes Belos, Goiânia e região. Conheça a Weiri Borges e agende uma conversa.">
     <!-- Pré-publicação: liberar indexação somente após revisar as pendências. -->
@@ -72,7 +72,7 @@
       <section id="inicio" class="hero" aria-labelledby="inicio-titulo">
         <div class="container hero__layout">
           <div class="hero__content">
-            <!-- Transmissão ao vivo: preenchida por js/live.js a partir do Supabase.
+            <!-- Transmissão ao vivo: preenchida por js/live.js a partir de data/live.json (gravado pelo painel /admin/).
                  Permanece oculta sem transmissão ativa, sem JavaScript ou em caso de falha. -->
             <aside class="hero-live" aria-label="Transmissão ao vivo" hidden>
               <p class="hero-live__badge"><span class="hero-live__dot" aria-hidden="true"></span>Ao vivo</p>

@@ -3,17 +3,14 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
 
-// Domínio dos projetos Supabase. Pode ser restringido ao projeto, ex.: https://abcdefghijkl.supabase.co
-export const SUPABASE_ORIGIN = 'https://*.supabase.co';
-
 export function securityHeaders(html) {
   const json = html.match(/<script type="application\/ld\+json" id="organization-data">([\s\S]*?)<\/script>/)?.[1];
   if (!json) throw new Error('JSON-LD ausente.');
   JSON.parse(json);
   const hash = createHash('sha256').update(json).digest('base64');
   return {
-    // connect-src: somente a API do Supabase (leitura do destaque "Ao vivo").
-    'Content-Security-Policy': `default-src 'none'; script-src 'self' 'sha256-${hash}'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src ${SUPABASE_ORIGIN}; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'`,
+    // connect-src 'self': leitura de data/live.json (destaque "Ao vivo").
+    'Content-Security-Policy': `default-src 'none'; script-src 'self' 'sha256-${hash}'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'`,
     'X-Content-Type-Options': 'nosniff',
     'Referrer-Policy': 'strict-origin-when-cross-origin',
     'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=(), usb=()',

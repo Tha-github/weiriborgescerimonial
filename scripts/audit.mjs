@@ -18,13 +18,13 @@ check(json['@type'] === 'Organization' && json.email === 'weiborgescerimonial@gm
 const server = createServer(async (req, res) => {
   const pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
   const relative = pathname === '/' ? 'index.html' : pathname.slice(1);
-  if (!['index.html', 'robots.txt', 'sitemap.xml'].includes(relative) && !/^(assets|css|js)\//.test(relative)) { res.writeHead(404); return res.end(); }
+  if (!['index.html', 'robots.txt', 'sitemap.xml'].includes(relative) && !/^(assets|css|js|data)\//.test(relative)) { res.writeHead(404); return res.end(); }
   const path = resolve(root, relative);
   if (!path.startsWith(root)) { res.writeHead(403); return res.end(); }
   try {
     const data = await readFile(path);
     for (const [name, value] of Object.entries(headers)) if (name !== 'Strict-Transport-Security') res.setHeader(name, value);
-    res.setHeader('Content-Type', ({ '.ttf': 'font/ttf', '.woff2': 'font/woff2', '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.svg': 'image/svg+xml', '.jpg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp', '.xml': 'application/xml', '.txt': 'text/plain; charset=utf-8' })[extname(path)]);
+    res.setHeader('Content-Type', ({ '.ttf': 'font/ttf', '.woff2': 'font/woff2', '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.svg': 'image/svg+xml', '.jpg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp', '.xml': 'application/xml', '.json': 'application/json', '.txt': 'text/plain; charset=utf-8' })[extname(path)]);
     res.end(data);
   } catch { res.writeHead(404); res.end(); }
 });

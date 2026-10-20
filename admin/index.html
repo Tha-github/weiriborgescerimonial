@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src https://*.supabase.co; object-src 'none'; base-uri 'none'; form-action 'none'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self' https://api.github.com; object-src 'none'; base-uri 'none'; form-action 'none'">
     <meta name="robots" content="noindex, nofollow">
     <meta name="referrer" content="no-referrer">
     <meta name="theme-color" content="#668E8D">
@@ -11,7 +11,6 @@
     <link rel="icon" href="../assets/icons/favicon.svg" type="image/svg+xml" sizes="any">
     <link rel="stylesheet" href="admin.css">
     <script src="../js/config.js" defer></script>
-    <script src="vendor/supabase-js-2.117.2.min.js" defer></script>
     <script src="admin.js" defer></script>
   </head>
   <body>
@@ -22,7 +21,6 @@
           <img src="../assets/images/web/logo1.png" width="393" height="180" alt="" decoding="async">
         </a>
         <div class="admin-account" hidden>
-          <span class="admin-account__email" id="admin-email"></span>
           <button class="admin-link-button" type="button" id="botao-sair">Sair</button>
         </div>
       </div>
@@ -35,48 +33,41 @@
         <p class="admin-loading"><span class="admin-spinner" aria-hidden="true"></span>Carregando…</p>
       </section>
 
-      <section class="admin-view admin-card admin-card--narrow" data-view="config" aria-labelledby="config-titulo" hidden>
-        <h1 id="config-titulo">Painel ainda não configurado</h1>
-        <p>Preencha <code>supabaseUrl</code> e <code>supabaseKey</code> em <code>js/config.js</code>, conforme o guia <code>supabase/LEIAME.md</code>.</p>
-      </section>
-
-      <section class="admin-view admin-card admin-card--narrow" data-view="signup" aria-labelledby="cadastro-titulo" hidden>
+      <section class="admin-view admin-card admin-card--narrow" data-view="setup" aria-labelledby="setup-titulo" hidden>
         <p class="admin-eyebrow">Primeiro acesso</p>
-        <h1 id="cadastro-titulo">Criar cadastro</h1>
-        <p class="admin-hint">Este cadastro é feito uma única vez e será a conta administradora do site. Depois dele, o painel passa a pedir apenas o login.</p>
-        <form id="form-cadastro" class="admin-form" novalidate>
+        <h1 id="setup-titulo">Configurar o painel</h1>
+        <p class="admin-hint">Feito uma única vez por quem mantém o site. Cole a chave de acesso do GitHub e defina a senha que a cliente vai usar. A chave fica gravada no site criptografada com essa senha. Passo a passo em <code>PAINEL.md</code>.</p>
+        <form id="form-setup" class="admin-form" novalidate>
           <div class="admin-field">
-            <label for="cadastro-email">E-mail</label>
-            <input id="cadastro-email" name="email" type="email" autocomplete="username" inputmode="email" required maxlength="254" aria-describedby="cadastro-email-erro">
-            <p class="admin-error" id="cadastro-email-erro"></p>
+            <label for="setup-token">Chave de acesso do GitHub (token)</label>
+            <input id="setup-token" name="token" type="password" autocomplete="off" spellcheck="false" required maxlength="300" aria-describedby="setup-token-ajuda setup-token-erro">
+            <p class="admin-hint" id="setup-token-ajuda">Token <em>fine-grained</em> com acesso somente a este repositório e permissão <em>Contents: Read and write</em>.</p>
+            <p class="admin-error" id="setup-token-erro"></p>
           </div>
           <div class="admin-field">
-            <label for="cadastro-senha">Senha</label>
+            <label for="setup-senha">Senha do painel</label>
             <div class="admin-password">
-              <input id="cadastro-senha" name="password" type="password" autocomplete="new-password" required minlength="8" maxlength="72" aria-describedby="cadastro-senha-ajuda cadastro-senha-erro">
-              <button class="admin-link-button" type="button" data-toggle-password="cadastro-senha" aria-controls="cadastro-senha" aria-pressed="false">Mostrar</button>
+              <input id="setup-senha" name="password" type="password" autocomplete="new-password" required minlength="10" maxlength="200" aria-describedby="setup-senha-ajuda setup-senha-erro">
+              <button class="admin-link-button" type="button" data-toggle-password="setup-senha" aria-controls="setup-senha" aria-pressed="false">Mostrar</button>
             </div>
-            <p class="admin-hint" id="cadastro-senha-ajuda">Mínimo de 8 caracteres.</p>
-            <p class="admin-error" id="cadastro-senha-erro"></p>
+            <p class="admin-hint" id="setup-senha-ajuda">Mínimo de 10 caracteres. Use uma frase fácil de lembrar e difícil de adivinhar.</p>
+            <p class="admin-error" id="setup-senha-erro"></p>
           </div>
           <div class="admin-field">
-            <label for="cadastro-confirmar">Confirmar senha</label>
-            <input id="cadastro-confirmar" name="confirm" type="password" autocomplete="new-password" required maxlength="72" aria-describedby="cadastro-confirmar-erro">
-            <p class="admin-error" id="cadastro-confirmar-erro"></p>
+            <label for="setup-confirmar">Confirmar senha</label>
+            <input id="setup-confirmar" name="confirm" type="password" autocomplete="new-password" required maxlength="200" aria-describedby="setup-confirmar-erro">
+            <p class="admin-error" id="setup-confirmar-erro"></p>
           </div>
-          <button class="admin-button" type="submit">Criar cadastro</button>
-          <p class="admin-status" id="cadastro-status" role="status" aria-live="polite"></p>
+          <button class="admin-button" type="submit">Salvar configuração</button>
+          <p class="admin-status" id="setup-status" role="status" aria-live="polite"></p>
         </form>
+        <button class="admin-link-button" type="button" data-show-view="login" id="voltar-login" hidden>Voltar ao login</button>
       </section>
 
       <section class="admin-view admin-card admin-card--narrow" data-view="login" aria-labelledby="login-titulo" hidden>
         <p class="admin-eyebrow">Painel administrativo</p>
         <h1 id="login-titulo">Entrar</h1>
         <form id="form-login" class="admin-form" novalidate>
-          <div class="admin-field">
-            <label for="login-email">E-mail</label>
-            <input id="login-email" name="email" type="email" autocomplete="username" inputmode="email" required maxlength="254">
-          </div>
           <div class="admin-field">
             <label for="login-senha">Senha</label>
             <div class="admin-password">
@@ -87,12 +78,7 @@
           <button class="admin-button" type="submit">Entrar</button>
           <p class="admin-status" id="login-status" role="status" aria-live="polite"></p>
         </form>
-      </section>
-
-      <section class="admin-view admin-card admin-card--narrow" data-view="denied" aria-labelledby="negado-titulo" hidden>
-        <h1 id="negado-titulo">Acesso não autorizado</h1>
-        <p>Esta conta entrou corretamente, mas não tem permissão para editar o site.</p>
-        <button class="admin-button admin-button--ghost" type="button" data-sign-out>Sair e usar outra conta</button>
+        <button class="admin-link-button admin-subtle" type="button" data-show-view="setup">Reconfigurar acesso</button>
       </section>
 
       <section class="admin-view" data-view="panel" aria-labelledby="painel-titulo" hidden>
@@ -139,7 +125,7 @@
             <div class="admin-switch">
               <input id="live-ativa" name="is_active" type="checkbox" role="switch" aria-describedby="live-ativa-ajuda">
               <label for="live-ativa">Exibir no site</label>
-              <p class="admin-hint" id="live-ativa-ajuda">Ligado: o destaque aparece no banner após salvar. Desligado: fica oculto.</p>
+              <p class="admin-hint" id="live-ativa-ajuda">Ligado: o destaque aparece no banner cerca de 1 minuto após salvar. Desligado: fica oculto.</p>
             </div>
             <div class="admin-actions">
               <button class="admin-button" type="submit" id="botao-salvar">Salvar alterações</button>
@@ -161,6 +147,24 @@
               </aside>
             </div>
             <a class="admin-link" href="../" target="_blank" rel="noopener">Ver o site <span aria-hidden="true">↗</span><span class="visually-hidden"> (abre em nova aba)</span></a>
+
+            <details class="admin-card admin-details">
+              <summary>Trocar a senha do painel</summary>
+              <form id="form-senha" class="admin-form" novalidate>
+                <div class="admin-field">
+                  <label for="nova-senha">Nova senha</label>
+                  <input id="nova-senha" name="password" type="password" autocomplete="new-password" required minlength="10" maxlength="200" aria-describedby="nova-senha-ajuda nova-senha-erro">
+                  <p class="admin-hint" id="nova-senha-ajuda">Mínimo de 10 caracteres.</p>
+                  <p class="admin-error" id="nova-senha-erro"></p>
+                </div>
+                <div class="admin-field">
+                  <label for="nova-confirmar">Confirmar nova senha</label>
+                  <input id="nova-confirmar" name="confirm" type="password" autocomplete="new-password" required maxlength="200" aria-describedby="nova-confirmar-erro">
+                  <p class="admin-error" id="nova-confirmar-erro"></p>
+                </div>
+                <button class="admin-button admin-button--ghost" type="submit">Trocar senha</button>
+              </form>
+            </details>
           </div>
         </div>
       </section>
