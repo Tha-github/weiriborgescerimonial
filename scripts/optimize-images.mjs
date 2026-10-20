@@ -20,7 +20,7 @@ const SOURCES = [
   { src: 'assets/logo/logo1.PNG', name: 'logo1', kind: 'logo', height: 180 },
   { src: 'assets/logo/logo2.PNG', name: 'logo2', kind: 'logo' },
   { src: 'assets/logo/logobanner.PNG', name: 'logobanner', kind: 'logo' },
-  { src: 'assets/images/weiribanner.png', name: 'weiribanner', kind: 'logo' },
+  { src: 'assets/images/weiribanner.png', name: 'weiribanner', kind: 'cutout', heights: [800, 1400] },
   { src: 'assets/images/cuidado.jpeg', name: 'cuidado', kind: 'photo', widths: [800, 1600] },
   { src: 'assets/images/escolha.jpeg', name: 'escolha', kind: 'photo', widths: [700, 1400] },
   { src: 'assets/images/galeria/01.PNG', name: 'galeria-01', kind: 'photo', widths: [400, 800] },
@@ -54,6 +54,21 @@ for (const item of SOURCES) {
     const png = await sharp(buffer).png({ compressionLevel: 9, palette: false }).toFile(resolve(root, OUT, `${item.name}.png`));
     const webp = await sharp(buffer).webp({ quality: 90, alphaQuality: 100 }).toFile(resolve(root, OUT, `${item.name}.webp`));
     console.log(`${item.name}: ${png.width}×${png.height}  png ${Math.round(png.size / 1024)} KB  webp ${Math.round(webp.size / 1024)} KB`);
+    continue;
+  }
+
+  if (item.kind === 'cutout') {
+    // Recorte com fundo transparente (foto do banner): WebP em cada altura + PNG de reserva na maior.
+    const trimmed = await sharp(input).rotate().trim({ threshold: 1 }).png().toBuffer();
+    for (const height of item.heights) {
+      const resized = sharp(trimmed).resize({ height, withoutEnlargement: true });
+      const webp = await resized.clone().webp({ quality: 82, alphaQuality: 90 }).toFile(resolve(root, OUT, `${item.name}-${height}.webp`));
+      console.log(`${item.name}-${height}: ${webp.width}×${webp.height}  webp ${Math.round(webp.size / 1024)} KB`);
+      if (height === Math.max(...item.heights)) {
+        const png = await resized.clone().png({ palette: true, quality: 90, compressionLevel: 9 }).toFile(resolve(root, OUT, `${item.name}-${height}.png`));
+        console.log(`${item.name}-${height}: png ${Math.round(png.size / 1024)} KB`);
+      }
+    }
     continue;
   }
 
