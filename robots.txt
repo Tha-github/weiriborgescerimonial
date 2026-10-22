@@ -1,4 +1,4 @@
-# Pré-publicação: o HTML usa noindex. Permitir leitura dessa diretiva.
 User-agent: *
 Allow: /
-# Sitemap será incluído após confirmar a URL, por scripts/prepare-publication.mjs.
+Disallow: /admin/
+Sitemap: https://weiriborgescerimonial.com.br/sitemap.xml

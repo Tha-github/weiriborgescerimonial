@@ -1,5 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- PREPARAÇÃO APENAS: sem URLs porque o domínio não foi confirmado.
-     Não submeter este arquivo vazio a buscadores.
-     scripts/prepare-publication.mjs gera o sitemap com URL absoluta. -->
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://weiriborgescerimonial.com.br/</loc></url></urlset>
