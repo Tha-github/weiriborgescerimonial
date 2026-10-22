@@ -75,7 +75,6 @@ absolutas quando receber a URL confirmada. Headers HTTP/HTTPS dependem da hosped
 ## Conteúdo e pendências
 
 - **Missão e conceito completo:** pendentes porque `prompt.md` está vazio.
-- **FAQ:** sete respostas em preparação; precisam ser preenchidas/aprovadas.
 - **Identidade visual:** assinatura tipográfica e favicon provisórios; falta logo.
 - **Imagens:** duas fotos de banco identificadas e oito espaços gráficos; faltam
   fotografias autorizadas e arte social com URLs definitivas.
